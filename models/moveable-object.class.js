@@ -7,6 +7,7 @@ class MoveableObject{
     imageCache = [];
     currentImage = 0;
     speed = 0.15;  //0.15 Pixel werden abgezogen
+    otherDirection = false;
 
     //loadImage('./img/test.png')
     loadImage(path){

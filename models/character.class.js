@@ -26,9 +26,11 @@ class Character extends MoveableObject {
     //character auf x-Achse bewegen
       if (this.world.keyboard.RIGHT) {
         this.x += this.speed;
+        this.otherDirection = false;
       }
       if (this.world.keyboard.LEFT) {
         this.x -= this.speed;
+        this.otherDirection = true;
       }
     }, 1000 / 60);
 
