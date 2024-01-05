@@ -12,9 +12,7 @@ class Cloud extends MoveableObject {
     }
 
     animate(){
-        setInterval(() => {
-            this.x -= 0.15; //0.15 Pixel werden abgezogen
-        }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
+        this.moveLeft();
     }
 
 }

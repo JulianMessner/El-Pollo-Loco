@@ -13,10 +13,13 @@ class Chicken extends MoveableObject {
 
         this.x = 200 + Math.random() * 500;
         this.y = 350;
+        this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }
 
     animate() {
+        this.moveLeft();
+
         setInterval(() => {
           let i = this.currentImage % this.IMAGES_WALKING.length; // dasselbe wie z.B. let i = 0 % 6; ->  0:6 = 0,Rest 0
           // i = 0, 1, 2, 3, 4, 5, 6, dann 0, 1, 2, 3, 4, 5, ...
