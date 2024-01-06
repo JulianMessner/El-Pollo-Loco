@@ -29,11 +29,13 @@ class Character extends MoveableObject {
       if (this.world.keyboard.RIGHT  && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
+        this.running_sound.volume = 0.5;
         this.running_sound.play();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
+        this.running_sound.volume = 0.5;
         this.running_sound.play();
       }
       this.world.camera_x = -this.x + 100;
@@ -43,11 +45,7 @@ class Character extends MoveableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { 
         //walk animation
-        let i = this.currentImage % this.IMAGES_WALKING.length; // dasselbe wie z.B. let i = 0 % 6; ->  0:6 = 0,Rest 0
-        // i = 0, 1, 2, 3, 4, 5, 6, dann 0, 1, 2, 3, 4, 5, ...
-        let path = this.IMAGES_WALKING[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        this.playAnimation(this.IMAGES_WALKING);
       }
     }, 50);
   }

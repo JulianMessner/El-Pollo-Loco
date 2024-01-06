@@ -23,6 +23,14 @@ class MoveableObject{
             });
     }
 
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_WALKING.length; // dasselbe wie z.B. let i = 0 % 6; ->  0:6 = 0,Rest 0
+        // i = 0, 1, 2, 3, 4, 5, 6, dann 0, 1, 2, 3, 4, 5, ...
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
     moveRight(){ //nicht notwendig function davor zu schreiben, da in class dies automatisch als Funktion deklariert wird
         console.log('moving right');
     }
