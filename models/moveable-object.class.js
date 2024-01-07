@@ -1,11 +1,4 @@
-class MoveableObject {
-  x = 120;
-  y = 300;
-  img;
-  height = 150;
-  width = 100;
-  imageCache = [];
-  currentImage = 0;
+class MoveableObject extends DrawableObject {
   speed = 0.15; //0.15 Pixel werden abgezogen
   otherDirection = false;
   speedY = 0;
@@ -24,12 +17,6 @@ class MoveableObject {
 
   isAboveGround() {
     return this.y < 155;
-  }
-
-  //loadImage('./img/test.png')
-  loadImage(path) {
-    this.img = new Image(); //Image muss nicht neu definiert werden -> hier dasselbe wie this.img = document.getElementById('image') <img id="image" src>
-    this.img.src = path;
   }
 
   loadImages(array) {
