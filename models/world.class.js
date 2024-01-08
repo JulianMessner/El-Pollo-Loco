@@ -4,12 +4,14 @@ class World {
   enemies = level1.enemies;
   clouds = level1.clouds;
   backgroundObjects = level1.backgroundObjects;
+  bottles = level1.bottles;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
   throwableObjects = [];
+
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -53,19 +55,21 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObjects);
-
     this.ctx.translate(-this.camera_x, 0); // Back
     // ------ Space for fixed objects -----
     this.addToMap(this.statusBar);
+
     this.ctx.translate(this.camera_x, 0); // Forward
 
-    this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.throwableObjects);
 
+    this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
+
 
     //draw() wird immer wieder aufgerufen
     let self = this;
