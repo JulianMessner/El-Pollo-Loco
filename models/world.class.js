@@ -9,7 +9,8 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
+  statusBar_Health = new StatusBar_Health();
+  statusBar_Bottles = new StatusBar_Bottles();
   throwableObjects = [];
 
 
@@ -46,7 +47,7 @@ class World {
     this.level.enemies.forEach(enemy => {
       if(this.character.isColliding(enemy)){
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy); //reduziert Energybar anhand von Kollision
+        this.statusBar_Health.setPercentage(this.character.energy); //reduziert Energybar anhand von Kollision
       }
     });
   }
@@ -57,7 +58,6 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.ctx.translate(-this.camera_x, 0); // Back
     // ------ Space for fixed objects -----
-    this.addToMap(this.statusBar);
 
     this.ctx.translate(this.camera_x, 0); // Forward
 
@@ -69,6 +69,8 @@ class World {
 
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBar_Health);
+    this.addToMap(this.statusBar_Bottles);
 
 
     //draw() wird immer wieder aufgerufen
