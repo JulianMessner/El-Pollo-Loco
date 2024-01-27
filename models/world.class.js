@@ -44,34 +44,51 @@ class World {
 
 
   checkCollisions(){
-    this.level.enemies.forEach(enemy => {
+    this.level.enemies.forEach((enemy) => {
       if(this.character.isColliding(enemy)){
         this.character.hit();
         this.statusBar_Health.setPercentage(this.character.energy); //reduziert Energybar anhand von Kollision
       }
     });
+
+    this.checkCollisionsWithBottles();
   }
+
+  checkCollisionsWithBottles() {
+    this.level.bottles.forEach((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        this.removeBottle(bottle);
+      }
+    });
+  }
+  
+  removeBottle(bottle) {
+    const index = this.level.bottles.indexOf(bottle);
+    if (index !== -1) {
+      this.statusBar_Bottles.collectBottle();
+      this.level.bottles.splice(index, 1);
+    }
+  }
+
+
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
     this.ctx.translate(-this.camera_x, 0); // Back
-    // ------ Space for fixed objects -----
-
     this.ctx.translate(this.camera_x, 0); // Forward
 
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addToMap(this.character);
-    this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.bottles.filter(bottle => !bottle.removed));
     this.addObjectsToMap(this.throwableObjects);
 
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar_Health);
     this.addToMap(this.statusBar_Bottles);
-
 
     //draw() wird immer wieder aufgerufen
     let self = this;
