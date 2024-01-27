@@ -30,6 +30,7 @@ class World {
   run(){
     setInterval(() => {
       this.checkCollisions();
+      this.checkCollisionsWithBottles();
       this.checkThrowObjects();
     }, 200);
   }
@@ -50,8 +51,6 @@ class World {
         this.statusBar_Health.setPercentage(this.character.energy); //reduziert Energybar anhand von Kollision
       }
     });
-
-    this.checkCollisionsWithBottles();
   }
 
   checkCollisionsWithBottles() {
