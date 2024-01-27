@@ -81,13 +81,12 @@ class World {
     this.ctx.translate(-this.camera_x, 0); // Back
     this.ctx.translate(this.camera_x, 0); // Forward
 
-    this.addObjectsToMap(this.throwableObjects);
-
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.bottles.filter(bottle => !bottle.removed));
+    this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar_Bottles);
