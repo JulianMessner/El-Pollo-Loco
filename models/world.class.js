@@ -12,6 +12,7 @@ class World {
   statusBar_Health = new StatusBar_Health();
   statusBar_Bottles = new StatusBar_Bottles();
   throwableObjects = [];
+  collectedBottles = 0;
 
 
   constructor(canvas, keyboard) {
@@ -39,9 +40,11 @@ class World {
 
 
   checkThrowObjects() {
-    if(this.keyboard.D){
+    if (this.keyboard.D && this.collectedBottles > 0) {
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
+
+      this.collectedBottles--;
     }
   }
 
@@ -70,6 +73,8 @@ class World {
     if (index !== -1) {
       this.statusBar_Bottles.collectBottle();
       this.level.bottles.splice(index, 1);
+
+      this.collectedBottles++;
     }
   }
 

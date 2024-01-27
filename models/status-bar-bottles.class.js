@@ -27,9 +27,20 @@ class StatusBar_Bottles extends DrawableObject {
         this.img = this.imageCache[path];
       }
     
-      resolveImageIndex() {
-        const index = Math.floor(this.percentage / 20);
-        return Math.min(index, this.IMAGES_BOTTLES.length - 1);
+      resolveImageIndex(){
+        if(this.percentage == 100){
+            return 5;  
+        } else if(this.percentage == 80){
+            return 4;
+        } else if(this.percentage == 60){
+            return 3;
+        } else if(this.percentage == 40){
+            return 2;
+        } else if(this.percentage == 20){
+            return 1;
+        } else {
+            return 0;
+        }
       }
 
       collectBottle() {
@@ -37,7 +48,7 @@ class StatusBar_Bottles extends DrawableObject {
           this.percentage += 20;
           this.updateImage();
         }
-      }
+    }
 
       updateImage() {
         let path = this.IMAGES_BOTTLES[this.resolveImageIndex()];
