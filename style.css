@@ -8,10 +8,12 @@ body{
     background-size: cover;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     margin: 0;
+    height: 100vh;
 }
 
 canvas{
     background-color: black;
+    display: block;
 }
 
 @font-face {
@@ -23,4 +25,21 @@ h1{
     font-size: 64px;
     letter-spacing: 3px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    display: block;
+}
+
+@media only screen and (max-width: 720px){
+    canvas{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px){
+    canvas{
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
 }
