@@ -23,9 +23,11 @@ class World {
     this.run();
   }
 
+  
   setWorld() {
     this.character.world = this;
   }
+
 
   run(){
     setInterval(() => {
@@ -53,6 +55,7 @@ class World {
     });
   }
 
+
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
@@ -61,6 +64,7 @@ class World {
     });
   }
   
+
   removeBottle(bottle) {
     const index = this.level.bottles.indexOf(bottle);
     if (index !== -1) {
@@ -68,7 +72,6 @@ class World {
       this.level.bottles.splice(index, 1);
     }
   }
-
 
 
   draw() {
