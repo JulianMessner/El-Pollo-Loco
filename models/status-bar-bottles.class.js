@@ -48,7 +48,7 @@ class StatusBar_Bottles extends DrawableObject {
           this.percentage += 20;
           this.updateImage();
         }
-    }
+      }
 
       updateImage() {
         let path = this.IMAGES_BOTTLES[this.resolveImageIndex()];
