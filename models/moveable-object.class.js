@@ -24,13 +24,16 @@ class MoveableObject extends DrawableObject {
   }
 
 
-  // character.isColliding(chicken);
   isColliding(moveableObject){
-    return this.x + this.width > moveableObject.x &&
-        this.y + this.height > moveableObject.y &&
-        this.x < moveableObject.x &&
-        this.y < moveableObject.y + moveableObject.height;
-  }
+    if (moveableObject && moveableObject.x !== undefined && moveableObject.y !== undefined) {
+        return this.x + this.width > moveableObject.x &&
+               this.y + this.height > moveableObject.y &&
+               this.x < moveableObject.x &&
+               this.y < moveableObject.y + moveableObject.height;
+    } else {
+        return false;
+    }
+}
 
   hit(){
     this.energy -= 5;

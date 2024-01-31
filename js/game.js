@@ -5,8 +5,6 @@ let keyboard = new Keyboard();
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-
-  console.log('My Character is', world.character); // oder world['character'])
 }
 
 window.addEventListener("keydown", (event) => {
@@ -34,7 +32,6 @@ window.addEventListener("keydown", (event) => {
     keyboard.D = true;
   }
 
-  console.log(event);
 } )
 
 window.addEventListener("keyup", (event) => {
@@ -62,5 +59,4 @@ window.addEventListener("keyup", (event) => {
     keyboard.D = false;
   }
 
-  console.log(event);
 } )
