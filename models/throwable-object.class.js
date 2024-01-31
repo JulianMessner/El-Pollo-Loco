@@ -9,12 +9,12 @@ class ThrowableObject extends MoveableObject {
   ];
 
   IMAGES_BOTTLE_SPLASH = [
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-    'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
   constructor(x, y, statusBarBottles) {
@@ -32,25 +32,33 @@ class ThrowableObject extends MoveableObject {
 
   throw() {
     this.speedY = 30;
-    this.applyGravity();
-  
-    // Interval für den Flaschenwurf
+
     const throwInterval = setInterval(() => {
-      // Überprüfen, ob die Flasche den Boden erreicht hat
-      if (this.y + this.height >= 350) {
-        clearInterval(throwInterval); // Interval beenden
-  
-        // Animation der Flaschensplash starten
+      if (this.y >= 330) {
+        clearInterval(throwInterval);
+
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+
+        clearInterval(this.gravityInterval);
+
+        setTimeout(() => {
+          this.img = new Image();
+        }, 200);
       } else {
-        // Animation der Flaschenrotation fortsetzen
+        this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
         this.x += 20;
       }
     }, 80);
-  
+
     this.statusBarBottles.reduceBottlesStatusBar();
+
+    this.gravityInterval = setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
   }
-  
 }
