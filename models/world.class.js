@@ -30,11 +30,12 @@ class World {
   }
 
 
-  run(){
+  run() {
     setInterval(() => {
       this.checkCollisions();
       this.checkCollisionsWithBottles();
       this.checkThrowObjects();
+      this.checkCollisionsWithThrowables(); // Füge diese Zeile hinzu
     }, 200);
   }
 
@@ -75,6 +76,26 @@ class World {
     });
   }
   
+  checkCollisionsWithThrowables() {
+    this.throwableObjects.forEach((throwableObject) => {
+      this.level.enemies.forEach((enemy) => {
+        if (throwableObject.isColliding(enemy)) {
+          throwableObject.splashBottle();
+          setTimeout(() => {
+            this.removeThrowableObject(throwableObject);
+          }, 200);
+        }
+      });
+    });
+  }
+
+  removeThrowableObject(throwableObject) {
+    const index = this.throwableObjects.indexOf(throwableObject);
+    if (index !== -1) {
+      this.throwableObjects.splice(index, 1);
+    }
+  }
+
 
   removeBottle(bottle) {
     const index = this.level.bottles.indexOf(bottle);

@@ -1,5 +1,6 @@
 class ThrowableObject extends MoveableObject {
   statusBarBottles;
+  throwInterval;
 
   IMAGES_BOTTLE_ROTATION = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
@@ -33,11 +34,11 @@ class ThrowableObject extends MoveableObject {
   throw() {
     this.speedY = 30;
 
-    const throwInterval = setInterval(() => {
-      this.checkCollisionWithEndboss();
+    this.throwInterval = setInterval(() => {
       if (this.y >= 330) {
-        clearInterval(throwInterval);
+        clearInterval(this.throwInterval);
         this.splashBottle();
+
       } else {
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
@@ -55,36 +56,15 @@ class ThrowableObject extends MoveableObject {
     }, 1000 / 25);
   }
 
-  checkCollisionWithEndboss() {
-    console.log("Checking collision with Endboss");
-    if (this.isCollidingWithEndboss()) {
-      console.log("Collision with Endboss detected!");
-      clearInterval(this.gravityInterval);
-      this.splashBottle();
-    }
-  }
 
-  isCollidingWithEndboss() {
-    if (
-      this.endboss &&
-      this.endboss.x !== undefined &&
-      this.endboss.y !== undefined
-    ) {
-      return (
-        this.x < this.endboss.x + this.endboss.width &&
-        this.y < this.endboss.y + this.endboss.height &&
-        this.x + this.width > this.endboss.x &&
-        this.y + this.height > this.endboss.y
-      );
-    }
-    return false;
-  }
 
   splashBottle() {
-    this.loadImages(this.IMAGES_BOTTLE_SPLASH);
-    this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+    clearInterval(this.throwInterval);
 
     clearInterval(this.gravityInterval);
+
+    this.loadImages(this.IMAGES_BOTTLE_SPLASH);
+    this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
 
     setTimeout(() => {
       this.img = new Image();
