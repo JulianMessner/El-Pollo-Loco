@@ -38,6 +38,15 @@ class World {
     }, 200);
   }
 
+  isColliding(moveableObject){
+    if (moveableObject && moveableObject.x !== undefined && moveableObject.y !== undefined) {
+        return this.x + this.width > moveableObject.x &&
+               this.y + this.height > moveableObject.y &&
+               this.x < moveableObject.x &&
+               this.y < moveableObject.y + moveableObject.height;
+    }
+  }
+
 
   checkThrowObjects() {
     if (this.keyboard.D && this.collectedBottles > 0) {
