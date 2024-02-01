@@ -30,8 +30,6 @@ class MoveableObject extends DrawableObject {
                this.y + this.height > moveableObject.y &&
                this.x < moveableObject.x &&
                this.y < moveableObject.y + moveableObject.height;
-    } else {
-        return false;
     }
 }
 

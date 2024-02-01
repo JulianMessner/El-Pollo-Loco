@@ -2,7 +2,6 @@ class World {
   character = new Character(); //let wird in Klassen nicht benötigt
   level = level1;
   enemies = level1.enemies;
-  endboss = level1.endBoss;
   clouds = level1.clouds;
   backgroundObjects = level1.backgroundObjects;
   bottles = level1.bottles;
@@ -88,7 +87,6 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.endBoss);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.bottles.filter(bottle => !bottle.removed));
     this.addObjectsToMap(this.throwableObjects);

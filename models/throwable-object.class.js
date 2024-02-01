@@ -34,17 +34,10 @@ class ThrowableObject extends MoveableObject {
     this.speedY = 30;
 
     const throwInterval = setInterval(() => {
+      this.checkCollisionWithEndboss();
       if (this.y >= 330) {
         clearInterval(throwInterval);
-
-        this.loadImages(this.IMAGES_BOTTLE_SPLASH);
-        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-
-        clearInterval(this.gravityInterval);
-
-        setTimeout(() => {
-          this.img = new Image();
-        }, 200);
+        this.splashBottle();
       } else {
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
@@ -60,5 +53,41 @@ class ThrowableObject extends MoveableObject {
         this.speedY -= this.acceleration;
       }
     }, 1000 / 25);
+  }
+
+  checkCollisionWithEndboss() {
+    console.log("Checking collision with Endboss");
+    if (this.isCollidingWithEndboss()) {
+      console.log("Collision with Endboss detected!");
+      clearInterval(this.gravityInterval);
+      this.splashBottle();
+    }
+  }
+
+  isCollidingWithEndboss() {
+    if (
+      this.endboss &&
+      this.endboss.x !== undefined &&
+      this.endboss.y !== undefined
+    ) {
+      return (
+        this.x < this.endboss.x + this.endboss.width &&
+        this.y < this.endboss.y + this.endboss.height &&
+        this.x + this.width > this.endboss.x &&
+        this.y + this.height > this.endboss.y
+      );
+    }
+    return false;
+  }
+
+  splashBottle() {
+    this.loadImages(this.IMAGES_BOTTLE_SPLASH);
+    this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+
+    clearInterval(this.gravityInterval);
+
+    setTimeout(() => {
+      this.img = new Image();
+    }, 200);
   }
 }
