@@ -5,6 +5,7 @@ class World {
   clouds = level1.clouds;
   backgroundObjects = level1.backgroundObjects;
   bottles = level1.bottles;
+  coins = level1.coins;
   canvas;
   ctx;
   keyboard;
@@ -111,6 +112,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.bottles.filter(bottle => !bottle.removed));
+    this.addObjectsToMap(this.level.coins.filter(bottle => !bottle.removed));
     this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
