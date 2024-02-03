@@ -1,19 +1,18 @@
 class DrawableObject {
-    img;
-    imageCache = [];
-    currentImage = 0;
-    x = 120;
-    y = 300;
-    height = 150;
-    width = 100;
+  img;
+  imageCache = [];
+  currentImage = 0;
+  x = 120;
+  y = 300;
+  height = 150;
+  width = 100;
 
-
-      //loadImage('./img/test.png')
+  //loadImage('./img/test.png')
   loadImage(path) {
     this.img = new Image(); //Image muss nicht neu definiert werden -> hier dasselbe wie this.img = document.getElementById('image') <img id="image" src>
     this.img.src = path;
   }
-  
+
   loadImages(array) {
     array.forEach((path) => {
       let img = new Image();
@@ -22,9 +21,13 @@ class DrawableObject {
     });
   }
 
-
   draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    try {
+      ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    } catch (e) {
+      console.warn("Error loading image", e);
+      console.log("Could not load image", this.img.src);
+    }
   }
 
   drawFrame(ctx) {

@@ -57,12 +57,9 @@ class ThrowableObject extends MoveableObject {
   }
 
 
-
   splashBottle() {
     clearInterval(this.throwInterval);
-
     clearInterval(this.gravityInterval);
-
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
 

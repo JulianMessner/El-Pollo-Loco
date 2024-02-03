@@ -23,7 +23,6 @@ class MoveableObject extends DrawableObject {
     };
   }
 
-
   isColliding(moveableObject){
     if (moveableObject && moveableObject.x !== undefined && moveableObject.y !== undefined) {
         return this.x + this.width > moveableObject.x &&
@@ -31,7 +30,7 @@ class MoveableObject extends DrawableObject {
                this.x < moveableObject.x &&
                this.y < moveableObject.y + moveableObject.height;
     }
-}
+  }
 
   hit(){
     this.energy -= 5;
