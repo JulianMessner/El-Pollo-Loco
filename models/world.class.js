@@ -11,6 +11,7 @@ class World {
   camera_x = 0;
   statusBar_Health = new StatusBar_Health();
   statusBar_Bottles = new StatusBar_Bottles();
+  statusBar_Coins = new StatusBar_Coins();
   throwableObjects = [];
   collectedBottles = 0;
 
@@ -37,15 +38,6 @@ class World {
       this.checkThrowObjects();
       this.checkCollisionsWithThrowables(); // Füge diese Zeile hinzu
     }, 200);
-  }
-
-  isColliding(moveableObject){
-    if (moveableObject && moveableObject.x !== undefined && moveableObject.y !== undefined) {
-        return this.x + this.width > moveableObject.x &&
-               this.y + this.height > moveableObject.y &&
-               this.x < moveableObject.x &&
-               this.y < moveableObject.y + moveableObject.height;
-    }
   }
 
 
@@ -123,6 +115,7 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar_Bottles);
+    this.addToMap(this.statusBar_Coins);
     this.addToMap(this.statusBar_Health);
 
     //draw() wird immer wieder aufgerufen
