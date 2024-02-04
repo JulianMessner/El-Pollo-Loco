@@ -1,6 +1,7 @@
 class ThrowableObject extends MoveableObject {
   statusBarBottles;
   throwInterval;
+  collidedWithEndBoss = false;
 
   IMAGES_BOTTLE_ROTATION = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",

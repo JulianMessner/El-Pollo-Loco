@@ -2,7 +2,7 @@ class Endboss extends MoveableObject {
   height = 400;
   width = 300;
   y = 50;
-  energy = 100;
+  endBossEnergy = 100;
 
   ENDBOSS_WALKING = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -43,17 +43,20 @@ class Endboss extends MoveableObject {
   }
 
   endBossHurt() {
-    this.energy -= 20;
-    let animationIndex = 0;
-
-    const intervalId = setInterval(() => {
-      if (animationIndex < this.ENDBOSS_HURT.length) {
-        this.playAnimation([this.ENDBOSS_HURT[animationIndex]]);
-        animationIndex++;
-      } else {
-        clearInterval(intervalId);
-        this.playAnimation(this.ENDBOSS_WALKING);
-      }
-    }, 200);
+    if (this.endBossEnergy >= 20) {
+      this.endBossEnergy -= 20;
+      let animationIndex = 0;
+  
+      const intervalId = setInterval(() => {
+        if (animationIndex < this.ENDBOSS_HURT.length) {
+          this.playAnimation([this.ENDBOSS_HURT[animationIndex]]);
+          animationIndex++;
+        } else {
+          clearInterval(intervalId);
+          this.playAnimation(this.ENDBOSS_WALKING);
+        }
+      }, 200);
+    }
   }
+  
 }

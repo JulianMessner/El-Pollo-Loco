@@ -74,19 +74,25 @@ class World {
   
   checkCollisionsWithThrowables() {
     this.throwableObjects.forEach((throwableObject) => {
-      this.level.enemies.forEach((enemy) => {
-        if (throwableObject.isColliding(enemy)) {
-          throwableObject.splashBottle();
-          setTimeout(() => {
-            this.removeThrowableObject(throwableObject);
-          }, 200);
-          if (enemy instanceof Endboss) {
-            enemy.endBossHurt();
-          }
+        // Überprüfen, ob das throwableObject bereits kollidiert ist
+        if (!throwableObject.collidedWithEndBoss) {
+            this.level.enemies.forEach((enemy) => {
+                if (throwableObject.isColliding(enemy)) {
+                    throwableObject.collidedWithEndBoss = true; // Markiere, dass das throwableObject kollidiert ist
+                    throwableObject.splashBottle();
+                    setTimeout(() => {
+                        this.removeThrowableObject(throwableObject);
+                    }, 200);
+                    if (enemy instanceof Endboss) {
+                        enemy.endBossHurt();
+                        this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
+                    }
+                }
+            });
         }
-      });
     });
-  }
+}
+
 
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin) => {
