@@ -13,6 +13,7 @@ class World {
   statusBar_Health = new StatusBar_Health();
   statusBar_Bottles = new StatusBar_Bottles();
   statusBar_Coins = new StatusBar_Coins();
+  statusBar_EndBoss = new StatusBar_EndBoss();
   throwableObjects = [];
   collectedBottles = 0;
   collectedCoins = 0;
@@ -139,6 +140,7 @@ class World {
     this.addToMap(this.statusBar_Bottles);
     this.addToMap(this.statusBar_Coins);
     this.addToMap(this.statusBar_Health);
+    this.addToMap(this.statusBar_EndBoss);
 
     //draw() wird immer wieder aufgerufen
     let self = this;
