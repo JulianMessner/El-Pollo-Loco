@@ -15,6 +15,7 @@ class World {
   statusBar_Coins = new StatusBar_Coins();
   throwableObjects = [];
   collectedBottles = 0;
+  collectedCoins = 0;
 
 
   constructor(canvas, keyboard) {
@@ -36,8 +37,9 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkCollisionsWithBottles();
+      this.checkCollisionsWithCoins();
       this.checkThrowObjects();
-      this.checkCollisionsWithThrowables(); // Füge diese Zeile hinzu
+      this.checkCollisionsWithThrowables();
     }, 200);
   }
 
@@ -82,6 +84,14 @@ class World {
     });
   }
 
+  checkCollisionsWithCoins() {
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.removeCoin(coin);
+      }
+    });
+  }
+
   removeThrowableObject(throwableObject) {
     const index = this.throwableObjects.indexOf(throwableObject);
     if (index !== -1) {
@@ -97,6 +107,16 @@ class World {
       this.level.bottles.splice(index, 1);
 
       this.collectedBottles++;
+    }
+  }
+
+  removeCoin(coin){
+    const index = this.level.coins.indexOf(coin);
+    if (index !== -1) {
+      this.statusBar_Coins.collectCoin();
+      this.level.coins.splice(index, 1);
+
+      this.collectedCoins++;
     }
   }
 

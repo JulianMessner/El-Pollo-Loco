@@ -16,7 +16,7 @@ class Bottle extends MoveableObject {
         this.animate();
     }
 
-    remove() {
+    removeBottle() {
         this.removed = true;
       }
 
