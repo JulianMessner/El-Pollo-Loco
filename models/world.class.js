@@ -81,7 +81,7 @@ class World {
             this.removeThrowableObject(throwableObject);
           }, 200);
           if (enemy instanceof Endboss) {
-            enemy.hurt();
+            enemy.endBossHurt();
           }
         }
       });
