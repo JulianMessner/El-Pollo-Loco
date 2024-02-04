@@ -80,6 +80,9 @@ class World {
           setTimeout(() => {
             this.removeThrowableObject(throwableObject);
           }, 200);
+          if (enemy instanceof Endboss) {
+            enemy.hurt();
+          }
         }
       });
     });
