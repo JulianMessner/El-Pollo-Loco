@@ -38,7 +38,11 @@ class Endboss extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      this.playAnimation(this.ENDBOSS_WALKING);
+      if (this.endBossEnergy <= 0) {
+        this.playAnimation(this.ENDBOSS_DEAD);
+      } else {
+        this.playAnimation(this.ENDBOSS_WALKING);
+      }
     }, 100);
   }
 
@@ -55,7 +59,7 @@ class Endboss extends MoveableObject {
           clearInterval(intervalId);
           this.playAnimation(this.ENDBOSS_WALKING);
         }
-      }, 200);
+      }, 100);
     }
   }
   
