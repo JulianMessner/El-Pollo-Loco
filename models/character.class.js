@@ -6,6 +6,19 @@ class Character extends MoveableObject {
   isMoving = false; 
   lastKeyPressTime = new Date().getTime();
 
+  CHARACTER_IDLE = [
+    "img/2_character_pepe/1_idle/idle/I-1.png",
+    "img/2_character_pepe/1_idle/idle/I-2.png",
+    "img/2_character_pepe/1_idle/idle/I-3.png",
+    "img/2_character_pepe/1_idle/idle/I-4.png",
+    "img/2_character_pepe/1_idle/idle/I-5.png",
+    "img/2_character_pepe/1_idle/idle/I-6.png",
+    "img/2_character_pepe/1_idle/idle/I-7.png",
+    "img/2_character_pepe/1_idle/idle/I-8.png",
+    "img/2_character_pepe/1_idle/idle/I-9.png",
+    "img/2_character_pepe/1_idle/idle/I-10.png",
+  ];
+
   CHARACTER_IDLE_LONG = [
     "img/2_character_pepe/1_idle/long_idle/I-11.png",
     "img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -61,6 +74,7 @@ class Character extends MoveableObject {
 
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
+    this.loadImages(this.CHARACTER_IDLE);
     this.loadImages(this.CHARACTER_IDLE_LONG);
     this.loadImages(this.CHARACTER_WALKING);
     this.loadImages(this.CHARACTER_JUMPING);
@@ -115,7 +129,9 @@ class Character extends MoveableObject {
         this.playAnimation(this.CHARACTER_WALKING);
       } else if (timeSinceLastKeyPress >= 4 && timeSinceLastKeyPress < 8){
           this.playAnimation(this.CHARACTER_IDLE_LONG);
-      }
+      } else if (timeSinceLastKeyPress <= 4){
+        this.playAnimation(this.CHARACTER_IDLE);
+      }    
     }, 150);
   }
 
