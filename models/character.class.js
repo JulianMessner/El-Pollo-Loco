@@ -3,6 +3,22 @@ class Character extends MoveableObject {
   width = 140;
   y = 70; //155 Position auf x-Achse stehend
   speed = 10;
+  isMoving = false; 
+  lastKeyPressTime = new Date().getTime();
+
+  CHARACTER_IDLE_LONG = [
+    "img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
+  ];
+
   CHARACTER_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -45,6 +61,7 @@ class Character extends MoveableObject {
 
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
+    this.loadImages(this.CHARACTER_IDLE_LONG);
     this.loadImages(this.CHARACTER_WALKING);
     this.loadImages(this.CHARACTER_JUMPING);
     this.loadImages(this.CHARACTER_DEAD);
@@ -55,25 +72,29 @@ class Character extends MoveableObject {
   }
 
   animate() {
-
-    setInterval(() => { 
-    //character auf x-Achse bewegen
+    setInterval(() => {
+      // character auf x-Achse bewegen
       this.running_sound.pause();
-      if (this.world.keyboard.RIGHT  && this.x < this.world.level.level_end_x) {
+      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
+        this.isMoving = true;
         this.running_sound.volume = 0.5;
         this.running_sound.play();
-      }
-
-      if (this.world.keyboard.LEFT && this.x > 0) {
+        this.lastKeyPressTime = new Date().getTime();
+      } else if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
+        this.isMoving = true;
         this.otherDirection = true;
         this.running_sound.volume = 0.5;
         this.running_sound.play();
+        this.lastKeyPressTime = new Date().getTime();
+      } else {
+        this.isMoving = false; 
       }
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
+        this.lastKeyPressTime = new Date().getTime();
       }
 
       this.world.camera_x = -this.x + 100;
@@ -81,19 +102,21 @@ class Character extends MoveableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-
-      if(this.isDead()){
+      const currentTime = new Date().getTime();
+      const timeSinceLastKeyPress = (currentTime - this.lastKeyPressTime) / 1000;
+  
+      if (this.isDead()) {
         this.playAnimation(this.CHARACTER_DEAD);
-      } else if(this.isHurt()) {
+      } else if (this.isHurt()) {
         this.playAnimation(this.CHARACTER_HURT);
-      } else if(this.isAboveGround()){
+      } else if (this.isAboveGround()) {
         this.playAnimation(this.CHARACTER_JUMPING);
-      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) { {
-          this.playAnimation(this.CHARACTER_WALKING);
-        }
+      } else if (this.isMoving) {
+        this.playAnimation(this.CHARACTER_WALKING);
+      } else if (timeSinceLastKeyPress >= 4 && timeSinceLastKeyPress < 8){
+          this.playAnimation(this.CHARACTER_IDLE_LONG);
       }
     }, 150);
-
   }
 
 }
