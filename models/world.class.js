@@ -67,18 +67,13 @@ class World {
         this.statusBar_Health.setPercentage(this.character.energy);
   
         if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-          if (!this.character.wasAboveGround && this.character.isAboveGround()) {
-            enemy.die();
+          if (this.character.isAboveGround() || this.character.isMoving) {
+            enemy.die(); 
           }
         }
       }
     });
   }
-  
-  
-
-  
-
 
 
   checkCollisionsWithBottles() {
@@ -91,11 +86,10 @@ class World {
   
   checkCollisionsWithThrowables() {
     this.throwableObjects.forEach((throwableObject) => {
-        // Überprüfen, ob das throwableObject bereits kollidiert ist
         if (!throwableObject.collidedWithEndBoss) {
             this.level.enemies.forEach((enemy) => {
                 if (throwableObject.isColliding(enemy)) {
-                    throwableObject.collidedWithEndBoss = true; // Markiere, dass das throwableObject kollidiert ist
+                    throwableObject.collidedWithEndBoss = true; 
                     throwableObject.splashBottle();
                     setTimeout(() => {
                         this.removeThrowableObject(throwableObject);

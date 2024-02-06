@@ -5,6 +5,8 @@ class Character extends MoveableObject {
   speed = 10;
   isMoving = false; 
   lastKeyPressTime = new Date().getTime();
+  world;
+  running_sound = new Audio('audio/running-sound.mp3');
 
   CHARACTER_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -69,9 +71,6 @@ class Character extends MoveableObject {
     'img/2_character_pepe/4_hurt/H-43.png',
   ];
 
-  world;
-  running_sound = new Audio('audio/running-sound.mp3');
-
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.CHARACTER_IDLE);
@@ -80,7 +79,6 @@ class Character extends MoveableObject {
     this.loadImages(this.CHARACTER_JUMPING);
     this.loadImages(this.CHARACTER_DEAD);
     this.loadImages(this.CHARACTER_HURT);
-    this.wasAboveGround = true; 
     this.applyGravity();
 
     this.animate();
@@ -113,12 +111,6 @@ class Character extends MoveableObject {
       }
 
       this.world.camera_x = -this.x + 100;
-
-      if (this.isAboveGround()) {
-        this.wasAboveGround = false; 
-      } else {
-        this.wasAboveGround = true;
-      }
       
     }, 1000 / 60);
 

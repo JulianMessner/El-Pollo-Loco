@@ -1,7 +1,6 @@
 class Chicken extends MoveableObject {
   height = 80;
   width = 70;
-  isDead = false;
 
   CHICKEN_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -35,16 +34,14 @@ class Chicken extends MoveableObject {
   }
 
   die() {
-    this.isDead = true;
     this.stopWalkingAnimation();
     this.playAnimation(this.CHICKEN_DEAD);
   
     setTimeout(() => {
       this.img = new Image();
-    }, 200);
-  }
-  
-  
+      this.y = 0;
+    }, 100);
+  } 
   
   stopWalkingAnimation() {
     clearInterval(this.walkingInterval);
