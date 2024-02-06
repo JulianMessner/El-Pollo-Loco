@@ -42,6 +42,7 @@ class ChickenSmall extends MoveableObject {
       
         setTimeout(() => {
           this.img = new Image();
+          this.y = 0;
         }, 200);
       }
       

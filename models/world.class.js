@@ -62,15 +62,11 @@ class World {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
         this.character.hit();
         this.statusBar_Health.setPercentage(this.character.energy);
-  
-        if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-          if (this.character.isAboveGround()) {
-            enemy.die(); 
-          }
-        }
+      } else if (this.character.isColliding(enemy) && this.character.isAboveGround() && (enemy instanceof Chicken || enemy instanceof ChickenSmall)){
+          enemy.die(); 
       }
     });
   }
