@@ -67,7 +67,7 @@ class World {
         this.statusBar_Health.setPercentage(this.character.energy);
   
         if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-          if (this.character.isAboveGround() || this.character.isMoving) {
+          if (this.character.isAboveGround()) {
             enemy.die(); 
           }
         }
