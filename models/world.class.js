@@ -60,19 +60,22 @@ class World {
   }
 
 
-checkCollisions() {
-  this.level.enemies.forEach((enemy) => {
-    if (this.character.isColliding(enemy)) {
-      this.character.hit();
-      this.statusBar_Health.setPercentage(this.character.energy); // reduziert Energybar anhand von Kollision
-
-      if (enemy instanceof Chicken || enemy instanceof ChickenSmall && this.character.isAboveGround() && !this.character.wasAboveGround) {
-        // Prüfen, ob der Charakter auf einem Huhn landet und springt
-        enemy.die(); // Methode aufrufen, um das Huhn als tot zu markieren
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusBar_Health.setPercentage(this.character.energy);
+  
+        if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
+          if (!this.character.wasAboveGround && this.character.isAboveGround()) {
+            enemy.die();
+          }
+        }
       }
-    }
-  });
-}
+    });
+  }
+  
+  
 
   
 
