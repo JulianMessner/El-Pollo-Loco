@@ -30,14 +30,15 @@ class World {
 
   
   setWorld() {
-    this.character.world = this;  // Versichern Sie sich, dass this.character nicht undefined ist
+    this.character.world = this;
+  
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
         enemy.world = this;
       }
     });
   }
-
+  
 
   run() {
     setInterval(() => {
