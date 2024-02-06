@@ -35,29 +35,20 @@ class Chicken extends MoveableObject {
   }
 
   die() {
-    this.isDead = true; // Markiere das Huhn als tot
-    this.stopWalkingAnimation(); // Stoppe die Laufanimation des Huhns
-    this.playAnimation(this.CHICKEN_DEAD); // Starte die Todesanimation des Huhns
+    this.isDead = true;
+    this.stopWalkingAnimation();
+    this.playAnimation(this.CHICKEN_DEAD);
   
     setTimeout(() => {
-      this.removeFromCanvas(); // Entferne den Feind nach 2 Sekunden vom Canvas
-    }, 2000);
+      this.img = new Image();
+    }, 200);
   }
-  
-  removeFromCanvas() {
-    if (this.world && this.world.level && this.world.level.enemies) {
-      const index = this.world.level.enemies.indexOf(this);
-      if (index !== -1) {
-        this.world.level.enemies.splice(index, 1);
-      }
-    }
-  }  
   
   
   
   stopWalkingAnimation() {
-    clearInterval(this.walkingInterval); // Stoppe die Laufanimation des Huhns
-    clearInterval(this.walkingAnimationInterval); // Stoppe die Laufanimations-Interval des Huhns
+    clearInterval(this.walkingInterval);
+    clearInterval(this.walkingAnimationInterval);
   }
   
 }

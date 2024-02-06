@@ -1,6 +1,7 @@
 class ChickenSmall extends MoveableObject {
     height = 60;
     width = 60;
+    isDead = false;
   
     CHICKEN_SMALL_WALKING = [
       "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
@@ -23,14 +24,31 @@ class ChickenSmall extends MoveableObject {
     }
   
     animate() {
-      setInterval(() => {
-        this.x -= this.speed;
-      }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
-  
-      this.moveLeft();
-  
-      setInterval(() => {
-        this.playAnimation(this.CHICKEN_SMALL_WALKING);
-      }, 100);
-    }
+        this.walkingInterval = setInterval(() => {
+          this.x -= this.speed;
+        }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
+    
+        this.moveLeft();
+    
+        this.walkingAnimationInterval = setInterval(() => {
+          this.playAnimation(this.CHICKEN_SMALL_WALKING);
+        }, 100);
+      }
+    
+      die() {
+        this.isDead = true;
+        this.stopWalkingAnimation();
+        this.playAnimation(this.CHICKEN_SMALL_DEAD);
+      
+        setTimeout(() => {
+          this.img = new Image();
+        }, 200);
+      }
+      
+      
+      
+      stopWalkingAnimation() {
+        clearInterval(this.walkingInterval);
+        clearInterval(this.walkingAnimationInterval);
+      }
   }

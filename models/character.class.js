@@ -115,9 +115,9 @@ class Character extends MoveableObject {
       this.world.camera_x = -this.x + 100;
 
       if (this.isAboveGround()) {
-        this.wasAboveGround = false; // Setze wasAboveGround auf false, wenn der Charakter am Boden ist
+        this.wasAboveGround = false; 
       } else {
-        this.wasAboveGround = true; // Setze wasAboveGround auf true, wenn der Charakter in der Luft ist
+        this.wasAboveGround = true;
       }
       
     }, 1000 / 60);
