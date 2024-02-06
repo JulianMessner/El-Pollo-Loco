@@ -59,14 +59,22 @@ class World {
   }
 
 
-  checkCollisions(){
-    this.level.enemies.forEach((enemy) => {
-      if(this.character.isColliding(enemy)){
-        this.character.hit();
-        this.statusBar_Health.setPercentage(this.character.energy); //reduziert Energybar anhand von Kollision
+checkCollisions() {
+  this.level.enemies.forEach((enemy) => {
+    if (this.character.isColliding(enemy)) {
+      this.character.hit();
+      this.statusBar_Health.setPercentage(this.character.energy); // reduziert Energybar anhand von Kollision
+
+      if (enemy instanceof Chicken && this.character.isAboveGround() && !this.character.wasAboveGround) {
+        // Prüfen, ob der Charakter auf einem Huhn landet und springt
+        enemy.die(); // Methode aufrufen, um das Huhn als tot zu markieren
       }
-    });
-  }
+    }
+  });
+}
+
+  
+
 
 
   checkCollisionsWithBottles() {

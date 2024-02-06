@@ -1,6 +1,8 @@
 class Chicken extends MoveableObject {
   height = 80;
   width = 70;
+  isDead = false;
+
   CHICKEN_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -21,14 +23,36 @@ class Chicken extends MoveableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.walkingInterval = setInterval(() => {
       this.x -= this.speed;
     }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
 
     this.moveLeft();
 
-    setInterval(() => {
+    this.walkingAnimationInterval = setInterval(() => {
       this.playAnimation(this.CHICKEN_WALKING);
     }, 100);
   }
+
+  die() {
+    this.isDead = true; // Markiere das Huhn als tot
+    this.stopWalkingAnimation(); // Stoppe die Laufanimation des Huhns
+    this.playAnimation(this.CHICKEN_DEAD); // Starte die Todesanimation des Huhns
+    
+    setTimeout(() => {
+      this.img = new Image();
+    }, 300);
+  }
+
+  hideDeadImage() {
+    // Setze das Bild auf null oder ein anderes leeres Bild, um es auszublenden
+    this.img = null; // Oder this.img = new Image(); mit einem leeren Bildpfad
+  }
+  
+  
+  stopWalkingAnimation() {
+    clearInterval(this.walkingInterval); // Stoppe die Laufanimation des Huhns
+    clearInterval(this.walkingAnimationInterval); // Stoppe die Laufanimations-Interval des Huhns
+  }
+  
 }

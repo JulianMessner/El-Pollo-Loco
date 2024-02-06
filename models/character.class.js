@@ -80,6 +80,7 @@ class Character extends MoveableObject {
     this.loadImages(this.CHARACTER_JUMPING);
     this.loadImages(this.CHARACTER_DEAD);
     this.loadImages(this.CHARACTER_HURT);
+    this.wasAboveGround = true; 
     this.applyGravity();
 
     this.animate();
@@ -113,6 +114,12 @@ class Character extends MoveableObject {
 
       this.world.camera_x = -this.x + 100;
 
+      if (this.isAboveGround()) {
+        this.wasAboveGround = false; // Setze wasAboveGround auf false, wenn der Charakter am Boden ist
+      } else {
+        this.wasAboveGround = true; // Setze wasAboveGround auf true, wenn der Charakter in der Luft ist
+      }
+      
     }, 1000 / 60);
 
     setInterval(() => {
