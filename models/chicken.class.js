@@ -40,7 +40,7 @@ class Chicken extends MoveableObject {
     setTimeout(() => {
       this.img = new Image();
       this.y = 0;
-    }, 100);
+    }, 70);
   } 
   
   stopWalkingAnimation() {

@@ -47,7 +47,7 @@ class World {
       this.checkCollisionsWithCoins();
       this.checkThrowObjects();
       this.checkCollisionsWithThrowables();
-    }, 200);
+    }, 50);
   }
 
 
