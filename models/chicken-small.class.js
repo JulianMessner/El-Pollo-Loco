@@ -23,30 +23,26 @@ class ChickenSmall extends MoveableObject {
     }
   
     animate() {
-        this.walkingInterval = setInterval(() => {
-          this.x -= this.speed;
-        }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
-    
-        this.moveLeft();
-    
-        this.walkingAnimationInterval = setInterval(() => {
-          this.playAnimation(this.CHICKEN_SMALL_WALKING);
-        }, 100);
-      }
-    
-      die() {
-        this.stopWalkingAnimation();
-        setTimeout(() => {
-        this.playAnimation(this.CHICKEN_SMALL_DEAD);
+      this.walkingInterval = setInterval(() => {
+        this.x -= this.speed;
+      }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
+  
+      this.moveLeft();
+  
+      this.walkingAnimationInterval = setInterval(() => {
+        this.playAnimation(this.CHICKEN_SMALL_WALKING);
       }, 100);
-      
-        setTimeout(() => {
-          this.img = new Image();
-          this.y = 0;
-        }, 70);
-      }
-      
-      
+    }
+  
+    die() {
+      this.stopWalkingAnimation();
+      this.playAnimation(this.CHICKEN_SMALL_DEAD);
+    
+      setTimeout(() => {
+        this.img = new Image();
+        this.y = 0;
+      }, 80);
+    } 
       
       stopWalkingAnimation() {
         clearInterval(this.walkingInterval);
