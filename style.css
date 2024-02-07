@@ -11,11 +11,6 @@ body{
     height: 100vh;
 }
 
-canvas{
-    background-color: black;
-    display: block;
-}
-
 @font-face {
     font-family: 'zabars';
     src: url(./fonts/zabars.ttf);
@@ -28,18 +23,100 @@ h1{
     display: block;
 }
 
-@media only screen and (max-width: 720px){
-    canvas{
-        width: 100%;
-    }
+canvas{
+    background-color: black;
+    display: none;
+    border-radius: 10px;
+    border: 1px solid #ca601b;
 }
 
-@media only screen and (max-height: 480px){
-    canvas{
-        height: 100vh;
-    }
-
-    h1 {
-        display: none;
-    }
+#startScreen{
+    height: 480px;
+    width: 720px;
+    background-image: url(./img/9_intro_outro_screens/start/startscreen_1.png);
+    background-size: 720px 480px;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #ca601b;
 }
+
+#startGameButton {
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+    height: 60px;
+    width: 200px;
+    background-color: #EAC100;
+    border: 1px solid black;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: black;
+    font-size: 42px;
+}
+
+#startGameButton:hover {
+    background-color: #DAA520; 
+}
+
+#startGameButton:active {
+    background-color: #B8860B; 
+    box-shadow: none; 
+    transform: translateY(2px); 
+}
+
+#loadingScreen {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 720px;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.loading-spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3); 
+    border-top: 8px solid #e2c233;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+@media (min-width: 768px) {
+    .button-52 {
+      padding: 13px 50px 13px;
+    }
+  }
+  
+  @media only screen and (max-width: 720px){
+      canvas{
+          width: 100%;
+      }
+  }
+  
+  @media only screen and (max-height: 480px){
+      canvas{
+          height: 100vh;
+      }
+  
+      h1 {
+          display: none;
+      }
+  }

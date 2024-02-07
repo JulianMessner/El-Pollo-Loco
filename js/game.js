@@ -3,8 +3,20 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-  canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard);
+  let canvas = document.getElementById("canvas");
+  let startScreen = document.getElementById("startScreen");
+  let loadingScreen = document.getElementById("loadingScreen");
+  
+  loadingScreen.style.display = "flex";
+  
+  setTimeout(function() {
+      loadingScreen.style.display = "none";
+      canvas.style.display = "block";
+      
+      let world = new World(canvas, keyboard);
+      
+      startScreen.style.display = "none";
+  }, 1000);
 }
 
 window.addEventListener("keydown", (event) => {

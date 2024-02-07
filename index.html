@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +27,20 @@
     <script src="./models/world.class.js"></script>
     <script src="./js/game.js"></script>
 </head>
-<body onload="init()">
+
+<body>
 
     <h1>El pollo loco</h1>
-    
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <div class="gameScreen">
+        <div id="startScreen">
+            <button id="startGameButton" onclick="init()">START</button>
+            <div id="loadingScreen" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+
 </body>
+
 </html>
