@@ -7,6 +7,7 @@ class Character extends MoveableObject {
   lastKeyPressTime = new Date().getTime();
   world;
   running_sound = new Audio('audio/running-sound.mp3');
+  jumping_sound = new Audio('audio/jump.mp3')
 
   CHARACTER_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -107,6 +108,8 @@ class Character extends MoveableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
+        this.jumping_sound.volume = 0.5;
+        this.jumping_sound.play();
         this.lastKeyPressTime = new Date().getTime();
       }
 
