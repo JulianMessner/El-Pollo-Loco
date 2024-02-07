@@ -62,17 +62,19 @@ class World {
     }
   }
 
-
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
-        this.character.hit();
-        this.statusBar_Health.setPercentage(this.character.energy);
-      } else if (this.character.isColliding(enemy) && this.character.isAboveGround() && (enemy instanceof Chicken || enemy instanceof ChickenSmall)){
-          enemy.die(); 
-      }
+        if (this.character.isColliding(enemy)) {
+            if (!this.character.isAboveGround()) {
+                this.character.hit();
+                this.statusBar_Health.setPercentage(this.character.energy);
+            } else if (this.character.isAboveGround() && this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof ChickenSmall)) {
+                enemy.die();
+            }
+        }
     });
-  }
+}
+
 
 
   checkCollisionsWithBottles() {

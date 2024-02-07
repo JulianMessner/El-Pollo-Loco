@@ -3,7 +3,6 @@ class Bottle extends MoveableObject {
     width = 50;
     height = 50;
     removed = false;
-    bottle_sound = new Audio('audio/bottle.mp3')
     IMAGES_BOTTLE_GROUND = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
@@ -18,8 +17,6 @@ class Bottle extends MoveableObject {
     }
 
     removeBottle() {
-      this.bottle_sound.volume = 0.5;
-      this.bottle_sound.play();
       this.removed = true;
       }
 
