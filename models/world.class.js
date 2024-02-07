@@ -56,6 +56,7 @@ class World {
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.statusBar_Bottles);
       this.throwableObjects.push(bottle);
       this.collectedBottles--;
+      this.keyboard.D = false;
     }
   }
 
