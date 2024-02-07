@@ -3,20 +3,24 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-  let canvas = document.getElementById("canvas");
-  let startScreen = document.getElementById("startScreen");
   let loadingScreen = document.getElementById("loadingScreen");
-  
   loadingScreen.style.display = "flex";
   
   setTimeout(function() {
-      loadingScreen.style.display = "none";
-      canvas.style.display = "block";
-      
-      let world = new World(canvas, keyboard);
-      
-      startScreen.style.display = "none";
+    startGame();
   }, 1000);
+}
+
+function startGame(){
+  let canvas = document.getElementById("canvas");
+  let startScreen = document.getElementById("startScreen");
+
+  loadingScreen.style.display = "none";
+  canvas.style.display = "block";
+  
+  let world = new World(canvas, keyboard);
+  
+  startScreen.style.display = "none";
 }
 
 window.addEventListener("keydown", (event) => {

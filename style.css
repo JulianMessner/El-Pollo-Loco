@@ -19,7 +19,7 @@ body{
 h1{
     font-size: 64px;
     letter-spacing: 3px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 4px 3px 5px rgb(89 81 81 / 83%);    
     display: block;
 }
 
@@ -27,7 +27,8 @@ canvas{
     background-color: black;
     display: none;
     border-radius: 10px;
-    border: 1px solid #ca601b;
+    border: 1px solid #5f5c5c;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 #startScreen{
@@ -39,7 +40,8 @@ canvas{
     display: flex;
     justify-content: center;
     border-radius: 10px;
-    border: 1px solid #ca601b;
+    border: 1px solid #5f5c5c;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 #startGameButton {
