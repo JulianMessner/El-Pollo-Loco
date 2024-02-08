@@ -1,7 +1,8 @@
 class ChickenSmall extends MoveableObject {
     height = 60;
     width = 60;
-  
+    chicken_sound = allSounds[5];
+      
     CHICKEN_SMALL_WALKING = [
       "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
       "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
@@ -37,8 +38,8 @@ class ChickenSmall extends MoveableObject {
     die() {
       this.stopWalkingAnimation();
       this.playAnimation(this.CHICKEN_SMALL_DEAD);
-      chicken_sound.volume = 0.1;
-      chicken_sound.play();
+      this.chicken_sound.volume = 0.1;
+      this.chicken_sound.play();
     
       setTimeout(() => {
         this.img = new Image();
