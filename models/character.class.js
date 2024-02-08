@@ -6,8 +6,8 @@ class Character extends MoveableObject {
   isMoving = false; 
   lastKeyPressTime = new Date().getTime();
   world;
-  running_sound = new Audio('audio/running-sound.mp3');
-  jumping_sound = new Audio('audio/jump.mp3')
+  running_sound = new Audio('audio/running-sound.mp3');;
+  jumping_sound = new Audio('audio/jump.mp3');
 
   CHARACTER_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",

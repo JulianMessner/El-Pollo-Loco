@@ -15,13 +15,8 @@ class World {
   statusBar_Coins = new StatusBar_Coins();
   statusBar_EndBoss = new StatusBar_EndBoss();
   throwableObjects = [];
-  bottle_sound = new Audio('audio/bottle.mp3');
-  coin_sound = new Audio('audio/coin.mp3');
-  chicken_sound = new Audio('audio/chicken-squish.mp3');
-  bottleSplash_sound = new Audio('audio/bottle-splash.mp3');
-  running_sound = new Audio('audio/running-sound.mp3');;
-  jumping_sound = new Audio('audio/jump.mp3');
-  chicken_sound = new Audio('audio/chicken-squish.mp3');
+  bottle_sound = new Audio('audio/bottle.mp3')
+  coin_sound = new Audio('audio/coin.mp3')
   collectedBottles = 0;
   collectedCoins = 0;
 
@@ -75,8 +70,6 @@ class World {
                 this.statusBar_Health.setPercentage(this.character.energy);
             } else if (this.character.isAboveGround() && this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof ChickenSmall)) {
                 enemy.die();
-                this.chicken_sound.volume = 0.1;
-                this.chicken_sound.play();
             }
         }
     });
@@ -96,10 +89,8 @@ class World {
     this.throwableObjects.forEach((throwableObject) => {
         if (!throwableObject.collidedWithEndBoss) {
             this.level.enemies.forEach((enemy) => {
-                if (throwableObject.isColliding(enemy) || throwableObject.y >= 330) {
+                if (throwableObject.isColliding(enemy)) {
                     throwableObject.collidedWithEndBoss = true; 
-                    this.bottleSplash_sound.volume = 0.1;
-                    this.bottleSplash_sound.play();
                     throwableObject.splashBottle();
                     setTimeout(() => {
                         this.removeThrowableObject(throwableObject);
@@ -107,8 +98,6 @@ class World {
                     if (enemy instanceof Endboss) {
                         enemy.endBossHurt();
                         this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
-                    } else if (enemy instanceof Chicken) {
-                        enemy.die();
                     }
                 }
             });

@@ -1,6 +1,7 @@
 class Chicken extends MoveableObject {
   height = 80;
   width = 70;
+  chicken_sound = new Audio('audio/chicken-squish.mp3')
 
   CHICKEN_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -36,6 +37,8 @@ class Chicken extends MoveableObject {
   die() {
     this.stopWalkingAnimation();
     this.playAnimation(this.CHICKEN_DEAD);
+    this.chicken_sound.volume = 0.1;
+    this.chicken_sound.play();
   
     setTimeout(() => {
       this.img = new Image();
