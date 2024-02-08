@@ -5,6 +5,7 @@ class MoveableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
+  hurt_sound = allSounds[7];
 
   applyGravity() {
     setInterval(() => {
@@ -34,6 +35,8 @@ class MoveableObject extends DrawableObject {
 
   hit(){
     this.energy -= 5;
+    this.hurt_sound.volume = 0.5;
+    this.hurt_sound.play();
     if(this.energy < 0) {
         this.energy = 0;
     } else{

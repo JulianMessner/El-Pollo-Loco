@@ -3,6 +3,7 @@ class Endboss extends MoveableObject {
   width = 300;
   y = 50;
   endBossEnergy = 100;
+  endBoss_hurt_sound = allSounds[6];
 
   ENDBOSS_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -71,6 +72,9 @@ class Endboss extends MoveableObject {
     if (this.endBossEnergy >= 20) {
       this.endBossEnergy -= 20;
       let animationIndex = 0;
+      
+      this.endBoss_hurt_sound.volume = 0.1;
+      this.endBoss_hurt_sound.play();
   
       const intervalId = setInterval(() => {
         if (animationIndex < this.ENDBOSS_HURT.length) {

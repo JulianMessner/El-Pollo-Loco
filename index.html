@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
+    <link rel="icon" type="image/x-icon" href="./img/4_enemie_boss_chicken/1_walk/G1.png">
     <link rel="stylesheet" href="style.css">
     <script src="./js/sounds.js"></script>
     <script src="./models/drawable-object.class.js"></script>
@@ -29,12 +30,12 @@
     <script src="./js/game.js"></script>
 </head>
 
-<body>
+<body onload="init()">
 
     <h1>El pollo loco</h1>
     <div class="gameScreen">
         <div id="startScreen">
-            <button id="startGameButton" onclick="init()">START</button>
+            <button id="startGameButton" onclick="playGame()">START</button>
             <div id="loadingScreen" style="display: none;">
                 <div class="loading-spinner"></div>
             </div>
