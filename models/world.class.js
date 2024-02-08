@@ -98,6 +98,8 @@ class World {
                     if (enemy instanceof Endboss) {
                         enemy.endBossHurt();
                         this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
+                    } else if (enemy instanceof Chicken) {
+                        enemy.die();
                     }
                 }
             });

@@ -129,9 +129,9 @@ class Character extends MoveableObject {
         this.playAnimation(this.CHARACTER_JUMPING);
       } else if (this.isMoving) {
         this.playAnimation(this.CHARACTER_WALKING);
-      } else if (timeSinceLastKeyPress >= 4 && timeSinceLastKeyPress < 8){
+      } else if (timeSinceLastKeyPress >= 8 && timeSinceLastKeyPress < 16){
           this.playAnimation(this.CHARACTER_IDLE_LONG);
-      } else if (timeSinceLastKeyPress <= 4){
+      } else if (timeSinceLastKeyPress <= 8){
         this.playAnimation(this.CHARACTER_IDLE);
       }    
     }, 150);
