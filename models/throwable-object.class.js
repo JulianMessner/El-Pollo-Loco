@@ -2,7 +2,6 @@ class ThrowableObject extends MoveableObject {
   statusBarBottles;
   throwInterval;
   collidedWithEndBoss = false;
-  bottleSplash_sound = new Audio('audio/bottle-splash.mp3')
 
   IMAGES_BOTTLE_ROTATION = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
@@ -60,8 +59,8 @@ class ThrowableObject extends MoveableObject {
 
 
   splashBottle() {
-    this.bottleSplash_sound.volume = 0.1;
-    this.bottleSplash_sound.play();
+    bottleSplash_sound.volume = 0.1;
+    bottleSplash_sound.play();
     clearInterval(this.throwInterval);
     clearInterval(this.gravityInterval);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);

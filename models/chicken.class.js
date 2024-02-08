@@ -37,8 +37,8 @@ class Chicken extends MoveableObject {
   die() {
     this.stopWalkingAnimation();
     this.playAnimation(this.CHICKEN_DEAD);
-    this.chicken_sound.volume = 0.1;
-    this.chicken_sound.play();
+    chicken_sound.volume = 0.1;
+    chicken_sound.play();
   
     setTimeout(() => {
       this.img = new Image();

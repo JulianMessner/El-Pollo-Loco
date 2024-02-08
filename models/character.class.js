@@ -6,8 +6,6 @@ class Character extends MoveableObject {
   isMoving = false; 
   lastKeyPressTime = new Date().getTime();
   world;
-  running_sound = new Audio('audio/running-sound.mp3');;
-  jumping_sound = new Audio('audio/jump.mp3');
 
   CHARACTER_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -88,19 +86,19 @@ class Character extends MoveableObject {
   animate() {
     setInterval(() => {
       // character auf x-Achse bewegen
-      this.running_sound.pause();
+      running_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.isMoving = true;
-        this.running_sound.volume = 0.5;
-        this.running_sound.play();
+        running_sound.volume = 0.5;
+        running_sound.play();
         this.lastKeyPressTime = new Date().getTime();
       } else if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.isMoving = true;
         this.otherDirection = true;
-        this.running_sound.volume = 0.5;
-        this.running_sound.play();
+        running_sound.volume = 0.5;
+        running_sound.play();
         this.lastKeyPressTime = new Date().getTime();
       } else {
         this.isMoving = false; 
@@ -108,8 +106,8 @@ class Character extends MoveableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.jumping_sound.volume = 0.5;
-        this.jumping_sound.play();
+        jumping_sound.volume = 0.5;
+        jumping_sound.play();
         this.lastKeyPressTime = new Date().getTime();
       }
 

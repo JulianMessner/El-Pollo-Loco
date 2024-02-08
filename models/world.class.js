@@ -15,8 +15,6 @@ class World {
   statusBar_Coins = new StatusBar_Coins();
   statusBar_EndBoss = new StatusBar_EndBoss();
   throwableObjects = [];
-  bottle_sound = new Audio('audio/bottle.mp3')
-  coin_sound = new Audio('audio/coin.mp3')
   collectedBottles = 0;
   collectedCoins = 0;
 
@@ -129,8 +127,8 @@ class World {
       this.level.bottles.splice(index, 1);
 
       this.collectedBottles++;
-      this.bottle_sound.volume = 0.5;
-      this.bottle_sound.play();
+      bottle_sound.volume = 0.5;
+      bottle_sound.play();
     }
   }
 
@@ -141,8 +139,8 @@ class World {
       this.level.coins.splice(index, 1);
 
       this.collectedCoins++;
-      this.coin_sound.volume = 0.5;
-      this.coin_sound.play();
+      coin_sound.volume = 0.5;
+      coin_sound.play();
     }
   }
 
