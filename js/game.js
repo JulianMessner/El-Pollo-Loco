@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+audioMuted = false;
 
 function init() {
   let loadingScreen = document.getElementById("loadingScreen");
@@ -21,6 +22,22 @@ function startGame(){
   let world = new World(canvas, keyboard);
   
   startScreen.style.display = "none";
+}
+
+function toggleMute() {
+  let audios = document.querySelectorAll("audio");
+
+  if (!audioMuted) {
+    audios.forEach(function(audio) {
+      audio.muted = true;
+    });
+    audioMuted = true;
+  } else {
+    audios.forEach(function(audio) {
+      audio.muted = false;
+    });
+    audioMuted = false;
+  }
 }
 
 window.addEventListener("keydown", (event) => {
