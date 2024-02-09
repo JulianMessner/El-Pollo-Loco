@@ -60,7 +60,7 @@ class World {
         enemy.world = this;
       }
     });
-  }
+    }
   
 
   run() {

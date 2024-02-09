@@ -87,7 +87,7 @@ class Character extends MoveableObject {
   }
 
   startAnimating() {
-        this.moveInterval = setInterval(() => {
+      this.moveInterval = setInterval(() => {
             // character auf x-Achse bewegen
       this.running_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -124,6 +124,9 @@ class Character extends MoveableObject {
   
       if (this.isDead()) {
         this.playAnimation(this.CHARACTER_DEAD);
+        setTimeout(() => {
+          this.img = new Image();
+        }, 80);
         this.stopAnimating();
         this.world.gameLost();
       } else if (this.isHurt()) {
