@@ -3,9 +3,12 @@ let world;
 let keyboard = new Keyboard();
 let showFullScreen = true;
 
-function playGame() {
+async function playGame() {
   let loadingScreen = document.getElementById("loadingScreen");
+  let gameLostScreen = document.getElementById("gameLostScreen");
+
   loadingScreen.style.display = "flex";
+  gameLostScreen.style.display = "none";
   
   setTimeout(function() {
     startGame();
@@ -24,6 +27,19 @@ function startGame(){
   let world = new World(canvas, keyboard);
   
   startScreen.style.display = "none";
+}
+
+
+function backToHome(){
+  let lostScreen = document.getElementById("gameLostScreen");
+  let canvas = document.getElementById("canvas");
+  let startButton = document.getElementById("startGameButton");
+  let startScreen = document.getElementById("startScreen");
+
+  lostScreen.style.display = "none";
+  canvas.style.display = "none";
+  startButton.style.display = "flex";
+  startScreen.style.display = "flex";
 }
 
 function toggleInfoDiv() {

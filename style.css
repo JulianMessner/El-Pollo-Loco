@@ -66,20 +66,22 @@ canvas {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     color: black;
     font-size: 42px;
+    justify-content: center;
 }
 
-#startGameButton:hover {
+#startGameButton:hover,
+.gameLostButtons button:hover {
     background-color: #DAA520;
 }
 
-#startGameButton:active {
+#startGameButton:active,
+.gameLostButtons button:active {
     background-color: #B8860B;
     box-shadow: none;
     transform: translateY(2px);
@@ -197,38 +199,56 @@ canvas {
     width: 150px;
 }
 
-
-@media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%;
-    }
-
-    #startScreen {
-        width: 100vw;
-        background-size: 100% 100%;
-    }
+#gameLostScreen{
+    position: absolute;
+    background-image: url(./img/9_intro_outro_screens/game_over/game\ over.png);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    z-index: 2;
+    display: none;
+    justify-content: center;
+    align-items: end;
 }
 
-@media only screen and (max-width: 530px) {
-    #rotateDeviceOverlay {
-        display: flex;
-    }
+.gameLostButtons{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
 }
 
-@media only screen and (max-width: 530px) and (orientation: landscape) {
-    #rotateDeviceOveray {
-        display: none;
-    }
+.gameLostButtons button{
+    background-color: #EAC100;
+    border: 1px solid black;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: black;
+    font-size: 36px;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+    animation: heartbeat 1.5s infinite;
 }
 
-@media only screen and (max-height: 480px) {
-
-    canvas,
-    #startScreen {
-        height: 100vh;
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
     }
-
-    h1 {
-        display: none;
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }

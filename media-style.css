@@ -1,0 +1,34 @@
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+
+    #startScreen {
+        width: 100vw;
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    #rotateDeviceOverlay {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 530px) and (orientation: landscape) {
+    #rotateDeviceOveray {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+
+    canvas,
+    #startScreen {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+}

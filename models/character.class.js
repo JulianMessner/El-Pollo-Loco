@@ -8,6 +8,7 @@ class Character extends MoveableObject {
   world;
   running_sound = allSounds[0];
   jumping_sound = allSounds[1];
+  endScreen = document.getElementById("gameLostScreen");
 
   CHARACTER_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -81,13 +82,13 @@ class Character extends MoveableObject {
     this.loadImages(this.CHARACTER_DEAD);
     this.loadImages(this.CHARACTER_HURT);
     this.applyGravity();
+    this.startAnimating(); 
 
-    this.animate();
   }
 
-  animate() {
-    setInterval(() => {
-      // character auf x-Achse bewegen
+  startAnimating() {
+        this.moveInterval = setInterval(() => {
+            // character auf x-Achse bewegen
       this.running_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
@@ -117,12 +118,14 @@ class Character extends MoveableObject {
       
     }, 1000 / 60);
 
-    setInterval(() => {
+    this.characterStateInterval = setInterval(() => {
       const currentTime = new Date().getTime();
       const timeSinceLastKeyPress = (currentTime - this.lastKeyPressTime) / 1000;
   
       if (this.isDead()) {
         this.playAnimation(this.CHARACTER_DEAD);
+        this.stopAnimating();
+        this.world.gameLost();
       } else if (this.isHurt()) {
         this.playAnimation(this.CHARACTER_HURT);
       } else if (this.isAboveGround()) {
@@ -137,4 +140,8 @@ class Character extends MoveableObject {
     }, 100);
   }
 
+  stopAnimating() {
+    clearInterval(this.moveInterval);
+    clearInterval(this.characterStateInterval);
+  }
 }

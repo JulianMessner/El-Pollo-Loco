@@ -7,6 +7,7 @@
     <title>El Pollo Loco</title>
     <link rel="icon" type="image/x-icon" href="./img/4_enemie_boss_chicken/1_walk/G1.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media-style.css">
     <script src="./js/sounds.js"></script>
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/status-bar-health.class.js"></script>
@@ -41,18 +42,25 @@
                 </div>
             </div>
             <canvas id="canvas" width="720" height="480"></canvas>
+            <div id="gameLostScreen">
+                <div class="gameLostButtons">
+                    <button class="restartGameButton" onclick="playGame()">RESTART</button>
+                    <button class="backHomeButton" onclick="backToHome()">HOME</button>
+                </div>
+            </div>
             <div class="buttons">
                 <img id="volumeIcon" onclick="toggleSound()" src="./img/10_icons/volume-on.png">
                 <img id="fullScreenIcon" onclick="toggleFullScreen()" src="./img/10_icons/full-screen.png">
                 <img id="infoIcon" onclick="toggleInfoDiv()" src="./img/10_icons/info.png">
-                <a id="privacyPolicyLink" href="./html/privacy-policy.html" target="_blank"><img src="./img/10_icons/privacy.png"></a>
+                <a id="privacyPolicyLink" href="./html/privacy-policy.html" target="_blank"><img
+                        src="./img/10_icons/privacy.png"></a>
             </div>
             <div id="infoDiv" style="display: none;">
                 <p>Left-Key = Move Left</p>
                 <p>Right-Key = Move Right</p>
                 <p>Space-Bar = Jump</p>
                 <p>D - Key = Throw Bottle</p>
-            </div>            
+            </div>
         </div>
     </div>
     <div id="rotateDeviceOverlay">
