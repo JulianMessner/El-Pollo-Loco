@@ -128,7 +128,7 @@ canvas {
     padding: 5px;
     border-radius: 8px;
     border: 1px solid black;
-    width: 110px;
+    width: 130px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -142,6 +142,10 @@ canvas {
 .buttons img:hover {
     cursor: pointer;
     filter: brightness(0) saturate(100%) invert(90%) sepia(16%) saturate(6526%) hue-rotate(359deg) brightness(92%) contrast(103%);
+}
+
+#privacyPolicyLink{
+    display: flex;
 }
 
 #infoDiv {
@@ -177,7 +181,7 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(211, 211, 211, 0.9);
+    background-color: rgba(211, 211, 211, 0.94);
     color: black;
     font-size: 24px;
     text-align: center;
@@ -205,13 +209,13 @@ canvas {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 530px) {
     #rotateDeviceOverlay {
         display: flex;
     }
 }
 
-@media only screen and (max-width: 500px) and (orientation: landscape) {
+@media only screen and (max-width: 530px) and (orientation: landscape) {
     #rotateDeviceOveray {
         display: none;
     }

@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(248, 194, 116, 1);
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+ol{
+    padding-left: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+p {
+    margin-bottom: 20px;
+}
+a {
+    color: #ffffff;
+}
