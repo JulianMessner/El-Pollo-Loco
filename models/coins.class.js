@@ -1,7 +1,7 @@
 class Coin extends MoveableObject {
     y = 380;
-    width = 100;
-    height = 100;
+    width = 120;
+    height = 120;
     removed = false;
     IMAGES_COINS_GROUND = [
         'img/8_coin/coin_1.png',

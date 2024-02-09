@@ -27,8 +27,6 @@ let volumeIcon = document.getElementById("volumeIcon");
     unmuteSound();
     volumeIcon.src = "img/10_icons/volume-on.png";
   }
-
-  document.getElementById("muteButton").blur();
 }
 
 function muteSound() {
