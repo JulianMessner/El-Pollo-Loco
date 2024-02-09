@@ -137,7 +137,30 @@ canvas{
 
 .buttons img:hover{
     cursor: pointer;
-    filter: brightness(0) saturate(100%) invert(34%) sepia(23%) saturate(0%) hue-rotate(248deg) brightness(87%) contrast(93%);
+    filter: brightness(0) saturate(100%) invert(90%) sepia(16%) saturate(6526%) hue-rotate(359deg) brightness(92%) contrast(103%);
+}
+
+#infoDiv{
+    display: none;
+    position: absolute;
+    top: 52px;
+    right: 10px;
+    z-index: 1;
+    background-color: rgba(242, 143, 63, 1);
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    font-size: 28px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#infoDiv p{
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
   
   @media only screen and (max-width: 720px){

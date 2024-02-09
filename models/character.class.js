@@ -134,7 +134,7 @@ class Character extends MoveableObject {
       } else if (timeSinceLastKeyPress <= 8){
         this.playAnimation(this.CHARACTER_IDLE);
       }    
-    }, 150);
+    }, 100);
   }
 
 }

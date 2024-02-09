@@ -26,6 +26,26 @@ function startGame(){
   startScreen.style.display = "none";
 }
 
+function toggleInfoDiv() {
+  let infoDiv = document.getElementById('infoDiv');
+  if (infoDiv.style.display === 'none') {
+      infoDiv.style.display = 'flex';
+      document.addEventListener('click', closeInfoDivOutside);
+
+  } else if(infoDiv.style.display === 'flex') {
+      infoDiv.style.display = 'none';
+  }
+}
+
+function closeInfoDivOutside(event) {
+  let infoDiv = document.getElementById('infoDiv');
+  let infoIcon = document.getElementById('infoIcon');
+  if (event.target !== infoDiv && event.target !== infoIcon && !infoDiv.contains(event.target)) {
+      infoDiv.style.display = 'none';
+      document.removeEventListener('click', closeInfoDivOutside);
+  }
+}
+
 function toggleFullScreen(){
   let fullScreen = document.getElementById("fullScreen");
 
