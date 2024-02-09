@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let showFullScreen = true;
 
 function playGame() {
   let loadingScreen = document.getElementById("loadingScreen");
@@ -25,6 +26,35 @@ function startGame(){
   startScreen.style.display = "none";
 }
 
+function toggleFullScreen(){
+  let fullScreen = document.getElementById("fullScreen");
+
+  if (showFullScreen === false){
+    exitFullscreen()
+    showFullScreen = true;
+    fullScreen.style.backgroundImage = "none";
+  } else if (showFullScreen === true){
+    enterFullscreen(fullScreen);
+    showFullScreen = false;
+    fullScreen.style.backgroundImage = "url(./img/5_background/layers/background-desert.png)";
+  }
+}
+
+function enterFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
 
 window.addEventListener("keydown", (event) => {
   if(event.keyCode == 39){

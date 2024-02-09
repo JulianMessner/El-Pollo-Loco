@@ -31,23 +31,23 @@
 </head>
 
 <body onload="init()">
-
-    <h1>El pollo loco</h1>
-    <div class="gameScreen">
-        <div id="startScreen">
-            <button id="startGameButton" onclick="playGame()">START</button>
-            <div id="loadingScreen" style="display: none;">
-                <div class="loading-spinner"></div>
+    <div id="fullScreen">
+        <h1>El pollo loco</h1>
+        <div class="gameScreen">
+            <div id="startScreen">
+                <button id="startGameButton" onclick="playGame()">START</button>
+                <div id="loadingScreen" style="display: none;">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+            <canvas id="canvas" width="720" height="480"></canvas>
+            <div class="buttons">
+                <img id="volumeIcon" onclick="toggleSound()" src="./img/10_icons/volume-on.png">
+                <img id="fullScreenIcon" onclick="toggleFullScreen()" src="./img/10_icons/full-screen.png">
+                <img id="infoIcon" src="./img/10_icons/info.png">
             </div>
         </div>
-        <canvas id="canvas" width="720" height="480"></canvas>
-        <div class="buttons">
-            <img id="volumeIcon" onclick="toggleSound()" src="./img/10_icons/volume-on.png">
-            <img id="fullScreenIcon" src="./img/10_icons/full-screen.png">
-            <img id="infoIcon" src="./img/10_icons/info.png">
-        </div>
     </div>
-
 </body>
 
 </html>
