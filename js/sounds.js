@@ -18,10 +18,14 @@ function init() {
 }
 
 function toggleSound() {
+let volumeIcon = document.getElementById("volumeIcon");
+
   if (sound === true) {
+    volumeIcon.src = "img/10_icons/volume-off.png";
     muteSound();
   } else if (sound === false) {
     unmuteSound();
+    volumeIcon.src = "img/10_icons/volume-on.png";
   }
 
   document.getElementById("muteButton").blur();

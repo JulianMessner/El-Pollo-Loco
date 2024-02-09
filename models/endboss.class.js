@@ -23,6 +23,17 @@ class Endboss extends MoveableObject {
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
+  ENDBOSS_ATTACK = [
+    'img/4_enemie_boss_chicken/3_attack/G13.png',
+    'img/4_enemie_boss_chicken/3_attack/G14.png',
+    'img/4_enemie_boss_chicken/3_attack/G15.png',
+    'img/4_enemie_boss_chicken/3_attack/G16.png',
+    'img/4_enemie_boss_chicken/3_attack/G17.png',
+    'img/4_enemie_boss_chicken/3_attack/G18.png',
+    'img/4_enemie_boss_chicken/3_attack/G19.png',
+    'img/4_enemie_boss_chicken/3_attack/G20.png',
+  ];
+
   ENDBOSS_HURT = [
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
     "img/4_enemie_boss_chicken/4_hurt/G22.png",
@@ -41,6 +52,7 @@ class Endboss extends MoveableObject {
     this.loadImages(this.ENDBOSS_ALERT);
     this.loadImages(this.ENDBOSS_HURT);
     this.loadImages(this.ENDBOSS_DEAD);
+    this.loadImages(this.ENDBOSS_ATTACK);
     this.x = 2500;
     this.speed = 0.8;
     this.animate();
@@ -54,14 +66,18 @@ class Endboss extends MoveableObject {
 
         if (this.endBossEnergy <= 0) {
           this.playAnimation(this.ENDBOSS_DEAD);
-        } else if (distanceToCharacter < 400) {
+        } else if (distanceToCharacter < 400 && distanceToCharacter > 300) {
           if (Math.floor(Date.now() / 2000) % 2) {
             this.playAnimation(this.ENDBOSS_WALKING);
             this.moveLeft();
           } else {
             this.playAnimation(this.ENDBOSS_ALERT);
           }
-        } else {
+        } else if (distanceToCharacter < 300){
+          this.playAnimation(this.ENDBOSS_ATTACK);
+          this.moveLeft();
+          this.speed = 4;
+        } else{
           this.playAnimation(this.ENDBOSS_WALKING);
         }
       }
@@ -72,7 +88,7 @@ class Endboss extends MoveableObject {
     if (this.endBossEnergy >= 20) {
       this.endBossEnergy -= 20;
       let animationIndex = 0;
-      
+
       this.endBoss_hurt_sound.volume = 0.1;
       this.endBoss_hurt_sound.play();
   

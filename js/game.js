@@ -13,8 +13,10 @@ function playGame() {
 
 function startGame(){
   let canvas = document.getElementById("canvas");
-  let startScreen = document.getElementById("startScreen");
+  let startButton = document.getElementById("startGameButton");
+  let loadingScreen = document.getElementById("loadingScreen");
 
+  startButton.style.display = "none";
   loadingScreen.style.display = "none";
   canvas.style.display = "block";
   

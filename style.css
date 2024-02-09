@@ -38,7 +38,9 @@ canvas{
     background-size: 720px 480px;
     background-repeat: no-repeat;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
     border: 1px solid #5f5c5c;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -86,6 +88,7 @@ canvas{
     border-radius: 10px;
 }
 
+
 .loading-spinner {
     border: 8px solid rgba(255, 255, 255, 0.3); 
     border-top: 8px solid #e2c233;
@@ -98,6 +101,26 @@ canvas{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.gameScreen {
+    position: relative;
+}
+
+.buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    background-color: rgba(123, 180, 221, 0.3);
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.buttons img{
+    height: 30px;
+    width: 30px;
 }
   
   @media only screen and (max-width: 720px){
