@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,7 @@ body{
     height: 100vh;
 }
 
-#fullScreen{
+#fullScreen {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,14 +24,14 @@ body{
     src: url(./fonts/zabars.ttf);
 }
 
-h1{
+h1 {
     font-size: 64px;
     letter-spacing: 3px;
-    text-shadow: 4px 3px 5px rgb(89 81 81 / 83%);    
+    text-shadow: 4px 3px 5px rgb(89 81 81 / 83%);
     display: block;
 }
 
-canvas{
+canvas {
     background-color: black;
     display: none;
     border-radius: 10px;
@@ -39,7 +39,7 @@ canvas{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-#startScreen{
+#startScreen {
     height: 480px;
     width: 720px;
     background-image: url(./img/9_intro_outro_screens/start/startscreen_1.png);
@@ -67,7 +67,7 @@ canvas{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-radius: 10px; 
+    border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -76,13 +76,13 @@ canvas{
 }
 
 #startGameButton:hover {
-    background-color: #DAA520; 
+    background-color: #DAA520;
 }
 
 #startGameButton:active {
-    background-color: #B8860B; 
-    box-shadow: none; 
-    transform: translateY(2px); 
+    background-color: #B8860B;
+    box-shadow: none;
+    transform: translateY(2px);
 }
 
 #loadingScreen {
@@ -98,7 +98,7 @@ canvas{
 
 
 .loading-spinner {
-    border: 8px solid rgba(255, 255, 255, 0.3); 
+    border: 8px solid rgba(255, 255, 255, 0.3);
     border-top: 8px solid #e2c233;
     border-radius: 50%;
     width: 50px;
@@ -107,8 +107,13 @@ canvas{
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .gameScreen {
@@ -119,7 +124,6 @@ canvas{
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 1;
     background-color: rgba(123, 180, 221, 0.3);
     padding: 5px;
     border-radius: 8px;
@@ -130,17 +134,17 @@ canvas{
     justify-content: space-between;
 }
 
-.buttons img{
+.buttons img {
     height: 30px;
     width: 30px;
 }
 
-.buttons img:hover{
+.buttons img:hover {
     cursor: pointer;
     filter: brightness(0) saturate(100%) invert(90%) sepia(16%) saturate(6526%) hue-rotate(359deg) brightness(92%) contrast(103%);
 }
 
-#infoDiv{
+#infoDiv {
     display: none;
     position: absolute;
     top: 52px;
@@ -157,30 +161,70 @@ canvas{
     justify-content: center;
 }
 
-#infoDiv p{
+#infoDiv p {
     margin: 0;
     margin-bottom: 10px;
     margin-top: 10px;
 }
-  
-  @media only screen and (max-width: 720px){
-      canvas{
-          width: 100%;
-      }
 
-      #startScreen{
+#rotateDeviceOverlay {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(211, 211, 211, 0.9);
+    color: black;
+    font-size: 24px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#rotateDeviceOverlay p{
+    font-size: 40px;
+}
+
+#rotateIcon{
+    height: 150px;
+    width: 150px;
+}
+
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+
+    #startScreen {
         width: 100vw;
         background-size: 100% 100%;
-      }
-  }
-  
-  @media only screen and (max-height: 480px){
-      canvas,
-      #startScreen{
-          height: 100vh;
-      }
-  
-      h1 {
-          display: none;
-      }
-  }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #rotateDeviceOverlay {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 500px) and (orientation: landscape) {
+    #rotateDeviceOveray {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+
+    canvas,
+    #startScreen {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+}
