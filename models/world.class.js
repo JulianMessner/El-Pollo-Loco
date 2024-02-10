@@ -51,6 +51,30 @@ class World {
     // })
   }
 
+  restartGame() {
+    // Setze den Endboss zurück
+    this.resetEndBoss();
+
+    // Führe weitere Rücksetzungen durch, falls nötig...
+
+    // Starte das Spiel erneut
+    this.run();
+}
+
+resetEndBoss() {
+    // Setze den Endboss in seinen ursprünglichen Zustand zurück
+    this.level.enemies.forEach(enemy => {
+        if (enemy instanceof Endboss) {
+            enemy.reset();
+        }
+    });
+}
+
+  gameWon(){
+    let wonScreen = document.getElementById("gameWonScreen");
+    wonScreen.style.display = "flex";
+  }
+
   
   setWorld() {
     this.character.world = this;

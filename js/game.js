@@ -2,13 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let showFullScreen = true;
+let worldInstance;
 
 async function playGame() {
   let loadingScreen = document.getElementById("loadingScreen");
   let gameLostScreen = document.getElementById("gameLostScreen");
+  let wonScreen = document.getElementById("gameWonScreen");
 
   loadingScreen.style.display = "flex";
   gameLostScreen.style.display = "none";
+  wonScreen.style.display = "none";
   
   setTimeout(function() {
     startGame();
@@ -24,9 +27,13 @@ function startGame(){
   loadingScreen.style.display = "none";
   canvas.style.display = "block";
   
-  let world = new World(canvas, keyboard);
-  
+  worldInstance = new World(canvas, keyboard);
+
   startScreen.style.display = "none";
+
+  if (worldInstance) {
+    worldInstance.restartGame();
+}
 }
 
 
@@ -35,8 +42,10 @@ function backToHome(){
   let canvas = document.getElementById("canvas");
   let startButton = document.getElementById("startGameButton");
   let startScreen = document.getElementById("startScreen");
+  let wonScreen = document.getElementById("gameWonScreen");
 
   lostScreen.style.display = "none";
+  wonScreen.style.display = "none";
   canvas.style.display = "none";
   startButton.style.display = "flex";
   startScreen.style.display = "flex";

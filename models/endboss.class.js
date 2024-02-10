@@ -60,7 +60,7 @@ class Endboss extends MoveableObject {
   
 
   animate() {
-    setInterval(() => {
+    this.endBossInterval = setInterval(() => {
       if (this.world && this.world.character) {
         const distanceToCharacter = Math.abs(this.world.character.x - this.x);
 
@@ -102,6 +102,20 @@ class Endboss extends MoveableObject {
         }
       }, 100);
     }
+    if(this.endBossEnergy <=0){
+      this.world.gameWon();
+    }
   }
+
+  // stopEndBossAnimating() {
+  //   clearInterval(this.endBossInterval);
+  // }
+
+  reset() {
+    // Setze den Endboss in seinen ursprünglichen Zustand zurück
+    this.endBossEnergy = 100;
+    // Setze weitere Eigenschaften zurück, falls nötig...
+    // Führe andere notwendige Rücksetzungen durch...
+}
   
 }
