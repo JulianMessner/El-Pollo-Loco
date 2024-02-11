@@ -83,7 +83,6 @@ class World {
   gameLost() {
     let lostScreen = document.getElementById("gameLostScreen");
     lostScreen.style.display = "flex";
-    allSounds[8].pause();
     this.lost_sound.play();
     this.lost_sound.volume = 0.3;
   }

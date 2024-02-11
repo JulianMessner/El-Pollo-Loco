@@ -128,6 +128,7 @@ class Character extends MoveableObject {
           this.y = -100;
         }, 80);
         this.stopAnimating();
+        this.world.gameLost();
       } else if (this.isHurt()) {
         this.playAnimation(this.CHARACTER_HURT);
       } else if (this.isAboveGround()) {
@@ -150,4 +151,5 @@ class Character extends MoveableObject {
   resetCharacterEnergy() {
     this.energy = 100;
   }
+
 }

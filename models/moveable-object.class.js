@@ -39,9 +39,7 @@ class MoveableObject extends DrawableObject {
     this.hurt_sound.volume = 0.5;
     this.hurt_sound.play();
     if(this.energy < 0) {
-      this.energy = 0;
-      this.world.gameLost();
-      return;
+      return this.energy = 0;
     } else{
       this.lastHit = new Date().getTime();
     }
