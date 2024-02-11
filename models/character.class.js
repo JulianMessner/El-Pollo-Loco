@@ -126,6 +126,7 @@ class Character extends MoveableObject {
         this.world.gameLost();
         setTimeout(() => {
           this.img = new Image();
+          this.y = 0;
         }, 80);
         this.stopAnimating();
       } else if (this.isHurt()) {
