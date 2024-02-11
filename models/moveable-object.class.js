@@ -74,4 +74,8 @@ class MoveableObject extends DrawableObject {
   jump() {
     this.speedY = 30;
   }
+
+  resetEnergy(){
+    this.energy = 100;
+  }
 }

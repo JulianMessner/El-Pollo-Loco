@@ -107,15 +107,8 @@ class Endboss extends MoveableObject {
     }
   }
 
-  // stopEndBossAnimating() {
-  //   clearInterval(this.endBossInterval);
-  // }
-
   reset() {
-    // Setze den Endboss in seinen ursprünglichen Zustand zurück
     this.endBossEnergy = 100;
-    // Setze weitere Eigenschaften zurück, falls nötig...
-    // Führe andere notwendige Rücksetzungen durch...
 }
   
 }

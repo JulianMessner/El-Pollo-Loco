@@ -1,3 +1,4 @@
+let endboss = new Endboss();
 const level1 = new Level(
   [
     new BackgroundObject("img/5_background/layers/air.png", -719), //-719 steht für x-Koordinate
@@ -30,13 +31,10 @@ const level1 = new Level(
    new Chicken(), 
    new Chicken(), 
    new Chicken(),
-  //  new Chicken(),
-  //  new Chicken(),
-  //  new Chicken(),
    new ChickenSmall(),
    new ChickenSmall(),
    new ChickenSmall(),
-   new Endboss(),
+   endboss,
   ],
 
   [

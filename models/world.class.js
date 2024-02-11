@@ -33,27 +33,35 @@ class World {
   gameLost(){
     let lostScreen = document.getElementById("gameLostScreen");
     lostScreen.style.display = "flex";
-    // this.character.stopAnimating();
-    // this.enemies.forEach(enemy => {
-    //   if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-    //     enemy.stopWalkingAnimation(); // Hier rufst du die stopAnimating() Methode für jeden Huhn-Feind auf
-    //   }
-    // });
-    // this.bottles.forEach(bottle =>{
-    //   if(bottle instanceof Bottle){
-    //     bottle.stopBottleAnimation();
-    //   }
-    // })
-    // this.coins.forEach(coin => {
-    //   if(coin instanceof Coin){
-    //     coin.stopCoinAnimation();
-    //   }
-    // })
+  }
+
+  resetLevel() {
+    this.level.bottles = [];
+
+    for (let i = 0; i < 5; i++) {
+      this.level.bottles.push(new Bottle());
+    }
+
+    this.level.coins = [];
+
+    for (let i = 0; i < 5; i++) {
+      this.level.coins.push(new Coin());
+    }
+
+    this.level.enemies = [endboss];
+    for (let i = 0; i < 3; i++) {
+      this.level.enemies.push(new Chicken());
+    }
+  
+    for (let i = 0; i < 3; i++) {
+      this.level.enemies.push(new ChickenSmall());
+    }
   }
 
   restartGame() {
     // Setze den Endboss zurück
     this.resetEndBoss();
+    this.resetLevel();
 
     // Führe weitere Rücksetzungen durch, falls nötig...
 
