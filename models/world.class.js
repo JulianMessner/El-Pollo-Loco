@@ -78,6 +78,7 @@ class World {
     wonScreen.style.display = "flex";
     this.cheering_sound.play();
     this.cheering_sound.volume = 0.3;
+    this.stopRunInterval();
   }
 
   gameLost() {
@@ -85,6 +86,7 @@ class World {
     lostScreen.style.display = "flex";
     this.lost_sound.play();
     this.lost_sound.volume = 0.3;
+    this.stopRunInterval();
   }
 
   setWorld() {
@@ -98,13 +100,17 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    this.runInterval = setInterval(() => {
       this.checkCollisions();
       this.checkCollisionsWithBottles();
       this.checkCollisionsWithCoins();
       this.checkThrowObjects();
       this.checkCollisionsWithThrowables();
     }, 50);
+  }
+
+  stopRunInterval(){
+    clearInterval(this.runInterval);
   }
 
   checkThrowObjects() {
