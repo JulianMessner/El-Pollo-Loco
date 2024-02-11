@@ -13,11 +13,7 @@ let allSounds = [
 let sound = false;
 
 function init() {
-  if (sound) {
-      allSounds[8].play();
-      allSounds[8].volume = 0.2;
-      allSounds[8].loop = true;
-  }
+  muteSound();
 }
 
 function toggleSound() {
@@ -45,6 +41,11 @@ function unmuteSound() {
       sound.muted = false;
   });
   sound = true;
-  init();
+
+  if (sound) {
+    allSounds[8].play();
+    allSounds[8].volume = 0.2;
+    allSounds[8].loop = true;
+}
 }
 

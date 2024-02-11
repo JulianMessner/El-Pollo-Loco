@@ -48,6 +48,7 @@ class World {
     }
 
     this.level.enemies = [endboss];
+
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new Chicken());
     }

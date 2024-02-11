@@ -123,10 +123,9 @@ class Character extends MoveableObject {
   
       if (this.energy <= 0) {
         this.playAnimation(this.CHARACTER_DEAD);
-        this.world.gameLost();
         setTimeout(() => {
           this.img = new Image();
-          this.y = 0;
+          this.y = -100;
         }, 80);
         this.stopAnimating();
       } else if (this.isHurt()) {

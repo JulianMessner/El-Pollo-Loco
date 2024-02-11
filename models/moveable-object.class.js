@@ -33,16 +33,20 @@ class MoveableObject extends DrawableObject {
     }
   }
 
-  hit(){
+  hit() {
+    console.log("Hit method called");
     this.energy -= 1;
     this.hurt_sound.volume = 0.5;
     this.hurt_sound.play();
     if(this.energy < 0) {
-        this.energy = 0;
+      this.energy = 0;
+      this.world.gameLost();
+      return;
     } else{
-        this.lastHit = new Date().getTime();
+      this.lastHit = new Date().getTime();
     }
   }
+  
 
   isHurt(){
     let timePassed = new Date().getTime() - this.lastHit; //Differenz in Millisekunden
