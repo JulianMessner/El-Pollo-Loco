@@ -56,6 +56,8 @@ class World {
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new ChickenSmall());
     }
+
+    this.character.resetEnergy();
   }
 
   restartGame() {

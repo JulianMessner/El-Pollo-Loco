@@ -122,13 +122,13 @@ class Character extends MoveableObject {
       const currentTime = new Date().getTime();
       const timeSinceLastKeyPress = (currentTime - this.lastKeyPressTime) / 1000;
   
-      if (this.isDead()) {
+      if (this.energy <= 0) {
         this.playAnimation(this.CHARACTER_DEAD);
+        this.world.gameLost();
         setTimeout(() => {
           this.img = new Image();
         }, 80);
         this.stopAnimating();
-        this.world.gameLost();
       } else if (this.isHurt()) {
         this.playAnimation(this.CHARACTER_HURT);
       } else if (this.isAboveGround()) {
@@ -146,5 +146,9 @@ class Character extends MoveableObject {
   stopAnimating() {
     clearInterval(this.moveInterval);
     clearInterval(this.characterStateInterval);
+  }
+
+  resetEnergy() {
+    this.energy = 100;
   }
 }
