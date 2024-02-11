@@ -34,7 +34,7 @@ class MoveableObject extends DrawableObject {
   }
 
   hit(){
-    this.energy -= 5;
+    this.energy -= 1;
     this.hurt_sound.volume = 0.5;
     this.hurt_sound.play();
     if(this.energy < 0) {
@@ -73,9 +73,5 @@ class MoveableObject extends DrawableObject {
 
   jump() {
     this.speedY = 30;
-  }
-
-  resetEnergy(){
-    this.energy = 100;
   }
 }

@@ -9,9 +9,9 @@ async function playGame() {
   let gameLostScreen = document.getElementById("gameLostScreen");
   let wonScreen = document.getElementById("gameWonScreen");
 
-  loadingScreen.style.display = "flex";
   gameLostScreen.style.display = "none";
   wonScreen.style.display = "none";
+  loadingScreen.style.display = "flex";
   
   setTimeout(function() {
     startGame();

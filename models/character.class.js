@@ -83,7 +83,6 @@ class Character extends MoveableObject {
     this.loadImages(this.CHARACTER_HURT);
     this.applyGravity();
     this.startAnimating(); 
-
   }
 
   startAnimating() {
@@ -148,7 +147,7 @@ class Character extends MoveableObject {
     clearInterval(this.characterStateInterval);
   }
 
-  resetEnergy() {
+  resetCharacterEnergy() {
     this.energy = 100;
   }
 }

@@ -69,7 +69,7 @@ class Endboss extends MoveableObject {
           setTimeout(() => {
             this.img = new Image();
           }, 80);
-        } else if (distanceToCharacter < 500 && distanceToCharacter > 300) {
+        } else if (distanceToCharacter < 550 && distanceToCharacter > 300) {
           if (Math.floor(Date.now() / 2000) % 2) {
             this.playAnimation(this.ENDBOSS_WALKING);
             this.moveLeft();

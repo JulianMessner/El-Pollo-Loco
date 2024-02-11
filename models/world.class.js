@@ -20,7 +20,6 @@ class World {
   collectedBottles = 0;
   collectedCoins = 0;
 
-
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -30,7 +29,7 @@ class World {
     this.run();
   }
 
-  gameLost(){
+  gameLost() {
     let lostScreen = document.getElementById("gameLostScreen");
     lostScreen.style.display = "flex";
   }
@@ -52,50 +51,42 @@ class World {
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new Chicken());
     }
-  
+
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new ChickenSmall());
     }
-
-    this.character.resetEnergy();
   }
 
   restartGame() {
-    // Setze den Endboss zurück
-    this.resetEndBoss();
+    this.resetEnergies();
     this.resetLevel();
-
-    // Führe weitere Rücksetzungen durch, falls nötig...
-
-    // Starte das Spiel erneut
     this.run();
-}
+  }
 
-resetEndBoss() {
-    // Setze den Endboss in seinen ursprünglichen Zustand zurück
-    this.level.enemies.forEach(enemy => {
-        if (enemy instanceof Endboss) {
-            enemy.reset();
-        }
+  resetEnergies() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy instanceof Endboss) {
+        enemy.reset();
+      }
     });
-}
 
-  gameWon(){
+    this.character.resetCharacterEnergy();
+  }
+
+  gameWon() {
     let wonScreen = document.getElementById("gameWonScreen");
     wonScreen.style.display = "flex";
   }
 
-  
   setWorld() {
     this.character.world = this;
-  
+
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
         enemy.world = this;
       }
     });
-    }
-  
+  }
 
   run() {
     setInterval(() => {
@@ -107,10 +98,13 @@ resetEndBoss() {
     }, 50);
   }
 
-
   checkThrowObjects() {
     if (this.keyboard.D && this.collectedBottles > 0) {
-      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.statusBar_Bottles);
+      let bottle = new ThrowableObject(
+        this.character.x + 100,
+        this.character.y + 100,
+        this.statusBar_Bottles
+      );
       this.throwableObjects.push(bottle);
       this.collectedBottles--;
       this.keyboard.D = false;
@@ -119,18 +113,20 @@ resetEndBoss() {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-            if (!this.character.isAboveGround()) {
-                this.character.hit();
-                this.statusBar_Health.setPercentage(this.character.energy);
-            } else if (this.character.isAboveGround() && this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof ChickenSmall)) {
-                enemy.die();
-            }
+      if (this.character.isColliding(enemy)) {
+        if (!this.character.isAboveGround()) {
+          this.character.hit();
+          this.statusBar_Health.setPercentage(this.character.energy);
+        } else if (
+          this.character.isAboveGround() &&
+          this.character.speedY < 0 &&
+          (enemy instanceof Chicken || enemy instanceof ChickenSmall)
+        ) {
+          enemy.die();
         }
+      }
     });
-}
-
-
+  }
 
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle) => {
@@ -139,27 +135,26 @@ resetEndBoss() {
       }
     });
   }
-  
+
   checkCollisionsWithThrowables() {
     this.throwableObjects.forEach((throwableObject) => {
-        if (!throwableObject.collidedWithEndBoss) {
-            this.level.enemies.forEach((enemy) => {
-                if (throwableObject.isColliding(enemy)) {
-                    throwableObject.collidedWithEndBoss = true; 
-                    throwableObject.splashBottle();
-                    setTimeout(() => {
-                        this.removeThrowableObject(throwableObject);
-                    }, 200);
-                    if (enemy instanceof Endboss) {
-                        enemy.endBossHurt();
-                        this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
-                    }
-                }
-            });
-        }
+      if (!throwableObject.collidedWithEndBoss) {
+        this.level.enemies.forEach((enemy) => {
+          if (throwableObject.isColliding(enemy)) {
+            throwableObject.collidedWithEndBoss = true;
+            throwableObject.splashBottle();
+            setTimeout(() => {
+              this.removeThrowableObject(throwableObject);
+            }, 200);
+            if (enemy instanceof Endboss) {
+              enemy.endBossHurt();
+              this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
+            }
+          }
+        });
+      }
     });
-}
-
+  }
 
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin) => {
@@ -176,7 +171,6 @@ resetEndBoss() {
     }
   }
 
-
   removeBottle(bottle) {
     const index = this.level.bottles.indexOf(bottle);
     if (index !== -1) {
@@ -189,7 +183,7 @@ resetEndBoss() {
     }
   }
 
-  removeCoin(coin){
+  removeCoin(coin) {
     const index = this.level.coins.indexOf(coin);
     if (index !== -1) {
       this.statusBar_Coins.collectCoin();
@@ -212,8 +206,10 @@ resetEndBoss() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.level.bottles.filter(bottle => !bottle.removed));
-    this.addObjectsToMap(this.level.coins.filter(bottle => !bottle.removed));
+    this.addObjectsToMap(
+      this.level.bottles.filter((bottle) => !bottle.removed)
+    );
+    this.addObjectsToMap(this.level.coins.filter((bottle) => !bottle.removed));
     this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
@@ -249,14 +245,14 @@ resetEndBoss() {
     }
   }
 
-  flipImage(moveableObject){
+  flipImage(moveableObject) {
     this.ctx.save();
     this.ctx.translate(moveableObject.width, 0);
     this.ctx.scale(-1, 1);
     moveableObject.x = moveableObject.x * -1;
   }
 
-  flipImageBack(moveableObject){
+  flipImageBack(moveableObject) {
     moveableObject.x = moveableObject.x * -1;
     this.ctx.restore();
   }
