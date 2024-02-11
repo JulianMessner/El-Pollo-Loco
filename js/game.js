@@ -8,6 +8,8 @@ async function playGame() {
   let loadingScreen = document.getElementById("loadingScreen");
   let gameLostScreen = document.getElementById("gameLostScreen");
   let wonScreen = document.getElementById("gameWonScreen");
+  allSounds[9].pause();
+  allSounds[10].pause();
 
   gameLostScreen.style.display = "none";
   wonScreen.style.display = "none";

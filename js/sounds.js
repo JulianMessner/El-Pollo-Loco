@@ -8,6 +8,8 @@ let allSounds = [
   new Audio("audio/endboss-hit.mp3"),
   new Audio("audio/character-hurt.mp3"),
   new Audio("audio/background-music.mp3"),
+  new Audio("audio/cheering.mp3"),
+  new Audio("audio/gameOver.mp3"),
 ];
 
 let sound = false;

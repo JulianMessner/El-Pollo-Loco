@@ -19,6 +19,8 @@ class World {
   coin_sound = allSounds[3];
   collectedBottles = 0;
   collectedCoins = 0;
+  cheering_sound = allSounds[9];
+  lost_sound = allSounds[10];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -27,11 +29,6 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-  }
-
-  gameLost() {
-    let lostScreen = document.getElementById("gameLostScreen");
-    lostScreen.style.display = "flex";
   }
 
   resetLevel() {
@@ -62,6 +59,8 @@ class World {
     this.resetEnergies();
     this.resetLevel();
     this.run();
+    this.cheering_sound.pause();
+    this.lost_sound.pause();
   }
 
   resetEnergies() {
@@ -77,6 +76,16 @@ class World {
   gameWon() {
     let wonScreen = document.getElementById("gameWonScreen");
     wonScreen.style.display = "flex";
+    this.cheering_sound.play();
+    this.cheering_sound.volume = 0.3;
+  }
+
+  gameLost() {
+    let lostScreen = document.getElementById("gameLostScreen");
+    lostScreen.style.display = "flex";
+    allSounds[8].pause();
+    this.lost_sound.play();
+    this.lost_sound.volume = 0.3;
   }
 
   setWorld() {
