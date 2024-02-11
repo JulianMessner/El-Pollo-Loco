@@ -11,7 +11,7 @@ class Bottle extends MoveableObject {
     constructor(){
         super().loadImage(this.IMAGES_BOTTLE_GROUND[0]);
         this.loadImages(this.IMAGES_BOTTLE_GROUND);
-        this.x = 100 + Math.random() * 2000;     
+        this.x = 200 + Math.random() * 2000;     
            
         this.animate();
     }
