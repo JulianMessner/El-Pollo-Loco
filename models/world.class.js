@@ -44,7 +44,7 @@ class World {
       this.level.coins.push(new Coin());
     }
 
-    this.level.enemies = [endboss];
+    this.level.enemies = [];
 
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new Chicken());
@@ -53,6 +53,8 @@ class World {
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new ChickenSmall());
     }
+
+    this.level.enemies.push(new Endboss());
   }
 
   restartGame() {
@@ -99,6 +101,27 @@ class World {
     });
   }
 
+  updateBossBehavior() {
+    if (this.level.enemies[this.level.enemies.length - 1].endBossEnergy <= 0) {
+      return;
+    }
+    const distanceToBoss = Math.abs(this.character.x - this.level.enemies[this.level.enemies.length - 1].x);
+    if ((distanceToBoss < 450) && (distanceToBoss > 200)) {
+      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_WALKING);
+      if (this.character.x < this.level.enemies[this.level.enemies.length - 1].x) {
+        this.level.enemies[this.level.enemies.length - 1].moveLeft();
+      }
+    } else if (distanceToBoss < 200) {
+      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_ATTACK);
+      this.level.enemies[this.level.enemies.length - 1].moveLeft();
+    } else {
+      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_ALERT);
+      if (this.character.x < this.level.enemies[this.level.enemies.length - 1].x) {
+      }
+    }
+  }
+  
+
   run() {
     this.runInterval = setInterval(() => {
       this.checkCollisions();
@@ -107,10 +130,15 @@ class World {
       this.checkThrowObjects();
       this.checkCollisionsWithThrowables();
     }, 50);
+
+    this.checkDistanceToEndboss = setInterval(() => {
+      this.updateBossBehavior();
+    }, 100);
   }
 
   stopRunInterval(){
     clearInterval(this.runInterval);
+    clearInterval(this.checkDistanceToEndboss);
   }
 
   checkThrowObjects() {
@@ -164,6 +192,9 @@ class World {
             if (enemy instanceof Endboss) {
               enemy.endBossHurt();
               this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
+              if(enemy.endBossEnergy <= 0){
+                this.gameWon();
+              }
             }
           }
         });

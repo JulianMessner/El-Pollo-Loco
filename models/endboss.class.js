@@ -24,14 +24,14 @@ class Endboss extends MoveableObject {
   ];
 
   ENDBOSS_ATTACK = [
-    'img/4_enemie_boss_chicken/3_attack/G13.png',
-    'img/4_enemie_boss_chicken/3_attack/G14.png',
-    'img/4_enemie_boss_chicken/3_attack/G15.png',
-    'img/4_enemie_boss_chicken/3_attack/G16.png',
-    'img/4_enemie_boss_chicken/3_attack/G17.png',
-    'img/4_enemie_boss_chicken/3_attack/G18.png',
-    'img/4_enemie_boss_chicken/3_attack/G19.png',
-    'img/4_enemie_boss_chicken/3_attack/G20.png',
+    "img/4_enemie_boss_chicken/3_attack/G13.png",
+    "img/4_enemie_boss_chicken/3_attack/G14.png",
+    "img/4_enemie_boss_chicken/3_attack/G15.png",
+    "img/4_enemie_boss_chicken/3_attack/G16.png",
+    "img/4_enemie_boss_chicken/3_attack/G17.png",
+    "img/4_enemie_boss_chicken/3_attack/G18.png",
+    "img/4_enemie_boss_chicken/3_attack/G19.png",
+    "img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
   ENDBOSS_HURT = [
@@ -55,33 +55,6 @@ class Endboss extends MoveableObject {
     this.loadImages(this.ENDBOSS_ATTACK);
     this.x = 2500;
     this.speed = 0.8;
-    this.animate();
-  }
-  
-
-  animate() {
-    this.endBossInterval = setInterval(() => {
-      if (this.world && this.world.character) {
-        const distanceToCharacter = Math.abs(this.world.character.x - this.x);
-
-        if (this.endBossEnergy <= 0) {
-          this.playAnimation(this.ENDBOSS_DEAD);
-        } else if (distanceToCharacter < 550 && distanceToCharacter > 300) {
-          if (Math.floor(Date.now() / 2000) % 2) {
-            this.playAnimation(this.ENDBOSS_WALKING);
-            this.moveLeft();
-          } else {
-            this.playAnimation(this.ENDBOSS_ALERT);
-          }
-        } else if (distanceToCharacter < 300){
-          this.playAnimation(this.ENDBOSS_ATTACK);
-          this.moveLeft();
-          this.speed = 4;
-        } else{
-          this.playAnimation(this.ENDBOSS_WALKING);
-        }
-      }
-    }, 100);    
   }
 
   endBossHurt() {
@@ -91,24 +64,28 @@ class Endboss extends MoveableObject {
 
       this.endBoss_hurt_sound.volume = 0.1;
       this.endBoss_hurt_sound.play();
-  
+
       const intervalId = setInterval(() => {
         if (animationIndex < this.ENDBOSS_HURT.length) {
           this.playAnimation([this.ENDBOSS_HURT[animationIndex]]);
           animationIndex++;
-        } else {
+        } else if (this.endBossEnergy <= 0){
+          this.playAnimation(this.ENDBOSS_DEAD);
+          setTimeout(() => {
+            clearInterval(intervalId);
+            this.img = new Image();
+            this.y = 0;
+            clearInterval(intervalId);
+          }, 2000);
+        }
+        else {
           clearInterval(intervalId);
-          this.playAnimation(this.ENDBOSS_WALKING);
         }
       }, 100);
-    }
-    if(this.endBossEnergy <=0){
-      this.world.gameWon();
     }
   }
 
   reset() {
     this.endBossEnergy = 100;
-}
-  
+  }
 }

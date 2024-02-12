@@ -6,7 +6,7 @@ class MoveableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
   hurt_sound = allSounds[7];
-
+  
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
