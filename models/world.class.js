@@ -60,6 +60,7 @@ class World {
   restartGame() {
     this.resetEnergies();
     this.resetLevel();
+    this.stopRunInterval();
     this.run();
     this.cheering_sound.pause();
     this.lost_sound.pause();
@@ -81,6 +82,8 @@ class World {
     this.cheering_sound.play();
     this.cheering_sound.volume = 0.3;
     this.stopRunInterval();
+    clearInterval(this.runInterval);
+    clearInterval(this.checkDistanceToEndboss);
   }
 
   gameLost() {
@@ -89,6 +92,8 @@ class World {
     this.lost_sound.play();
     this.lost_sound.volume = 0.3;
     this.stopRunInterval();
+    clearInterval(this.runInterval);
+    clearInterval(this.checkDistanceToEndboss);
   }
 
   setWorld() {
