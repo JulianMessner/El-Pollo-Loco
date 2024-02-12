@@ -54,7 +54,7 @@ class Endboss extends MoveableObject {
     this.loadImages(this.ENDBOSS_DEAD);
     this.loadImages(this.ENDBOSS_ATTACK);
     this.x = 2500;
-    this.speed = 0.8;
+    this.speed = 4.8;
   }
 
   endBossHurt() {
@@ -76,7 +76,7 @@ class Endboss extends MoveableObject {
             this.img = new Image();
             this.y = 0;
             clearInterval(intervalId);
-          }, 2000);
+          }, 3000);
         }
         else {
           clearInterval(intervalId);

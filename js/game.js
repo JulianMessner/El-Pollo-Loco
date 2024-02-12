@@ -24,10 +24,12 @@ function startGame(){
   let canvas = document.getElementById("canvas");
   let startButton = document.getElementById("startGameButton");
   let loadingScreen = document.getElementById("loadingScreen");
+  let mobileKeys = document.getElementById("mobileKeysOverlay");
 
   startButton.style.display = "none";
   loadingScreen.style.display = "none";
   canvas.style.display = "block";
+  mobileKeys.style.display = "flex";
   
   worldInstance = new World(canvas, keyboard);
 
@@ -38,19 +40,21 @@ function startGame(){
 }
 }
 
-
 function backToHome(){
   let lostScreen = document.getElementById("gameLostScreen");
   let canvas = document.getElementById("canvas");
   let startButton = document.getElementById("startGameButton");
   let startScreen = document.getElementById("startScreen");
   let wonScreen = document.getElementById("gameWonScreen");
+  let mobileKeys = document.getElementById("mobileKeysOverlay");
+
 
   lostScreen.style.display = "none";
   wonScreen.style.display = "none";
   canvas.style.display = "none";
   startButton.style.display = "flex";
   startScreen.style.display = "flex";
+  mobileKeys.style.display = "none";
 }
 
 function toggleInfoDiv() {
@@ -156,3 +160,38 @@ window.addEventListener("keyup", (event) => {
   }
 
 } )
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.getElementById('mobileLeft').addEventListener('touchstart', () => {
+    keyboard.LEFT = true;
+  });
+
+  document.getElementById('mobileLeft').addEventListener('touchend', () => {
+    keyboard.LEFT = false;
+  });
+
+  document.getElementById('mobileRight').addEventListener('touchstart', () => {
+    keyboard.RIGHT = true;
+  });
+
+  document.getElementById('mobileRight').addEventListener('touchend', () => {
+    keyboard.RIGHT = false;
+  });
+
+  document.getElementById('mobileJump').addEventListener('touchstart', () => {
+    keyboard.SPACE = true;
+  });
+
+  document.getElementById('mobileJump').addEventListener('touchend', () => {
+    keyboard.SPACE = false;
+  });
+
+  document.getElementById('mobileThrow').addEventListener('touchstart', () => {
+    keyboard.D = true;
+  });
+
+  document.getElementById('mobileThrow').addEventListener('touchend', () => {
+    keyboard.D = false;
+  });
+});

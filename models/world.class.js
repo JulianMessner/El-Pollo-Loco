@@ -111,12 +111,12 @@ class World {
       return;
     }
     const distanceToBoss = Math.abs(this.character.x - this.level.enemies[this.level.enemies.length - 1].x);
-    if ((distanceToBoss < 450) && (distanceToBoss > 200)) {
+    if ((distanceToBoss < 450) && (distanceToBoss > 250)) {
       this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_WALKING);
       if (this.character.x < this.level.enemies[this.level.enemies.length - 1].x) {
         this.level.enemies[this.level.enemies.length - 1].moveLeft();
       }
-    } else if (distanceToBoss < 200) {
+    } else if (distanceToBoss < 250) {
       this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_ATTACK);
       this.level.enemies[this.level.enemies.length - 1].moveLeft();
     } else {

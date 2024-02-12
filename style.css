@@ -81,7 +81,8 @@ canvas {
 }
 
 #startGameButton:active,
-.gameLostButtons button:active {
+.gameLostButtons button:active,
+.panel img:active {
     background-color: #B8860B;
     box-shadow: none;
     transform: translateY(2px);
@@ -268,4 +269,37 @@ canvas {
     100% {
         transform: scale(1);
     }
+}
+
+#mobileKeysOverlay {
+    display: none;
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.panel{
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel img{
+    height: 40px;
+    width: 40px;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+    background-color: #EAC100;
+    border: 1px solid black;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: black;
+    font-size: 42px;
 }
