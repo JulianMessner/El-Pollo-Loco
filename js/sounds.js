@@ -6,7 +6,7 @@ let allSounds = [
   new Audio("audio/jump.mp3"),
   new Audio("audio/bottle.mp3"),
   new Audio("audio/coin.mp3"),
-  new Audio("audio/bottle-splash.mp3"),
+  new Audio("audio/bottle-splash-short.mp3"),
   new Audio("audio/chicken-squish.mp3"),
   new Audio("audio/endboss-hit.mp3"),
   new Audio("audio/character-hurt.mp3"),
