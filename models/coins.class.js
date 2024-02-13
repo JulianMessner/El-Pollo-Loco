@@ -13,16 +13,28 @@ class Coin extends MoveableObject {
     this.animate();
   }
 
+
+  /**
+   * Removes the coin from the game by setting removed to true.
+   */
   removeCoin() {
     this.removed = true;
   }
 
+
+  /**
+   * Animates the coin.
+   */
   animate() {
     this.coinAnimation = setInterval(() => {
       this.playAnimation(this.IMAGES_COINS_GROUND);
     }, 200);
   }
 
+  
+  /**
+   * Stops the coin animation.
+   */
   stopCoinAnimation() {
     clearInterval(this.coinAnimation);
   }

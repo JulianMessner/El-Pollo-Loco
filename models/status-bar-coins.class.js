@@ -20,12 +20,22 @@ class StatusBar_Coins extends DrawableObject {
     this.setPercentage(0);
   }
 
+
+  /**
+   * Sets the percentage of coins in the status bar.
+   * @param {number} percentage - The percentage of coins to set.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_STATUS_COINS[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+
+  /**
+   * Resolves the index of the image path based on the current percentage.
+   * @returns {number} The index of the image path.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;
@@ -42,6 +52,10 @@ class StatusBar_Coins extends DrawableObject {
     }
   }
 
+
+  /**
+   * Increases the percentage of coins in the status bar by 20%.
+   */
   collectCoin() {
     if (this.percentage < 100) {
       this.percentage += 20;
@@ -49,11 +63,19 @@ class StatusBar_Coins extends DrawableObject {
     }
   }
 
+
+  /**
+   * Updates the image of the status bar based on the current percentage.
+   */
   updateStatusCoinsImage() {
     let path = this.IMAGES_STATUS_COINS[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+
+  /**
+   * Reduces the percentage of coins in the status bar by 20%.
+   */
   reduceBottlesStatusBar() {
     if (this.percentage >= 20) {
       this.percentage -= 20;

@@ -57,6 +57,10 @@ class Endboss extends MoveableObject {
     this.speed = 4.8;
   }
 
+
+  /**
+   * Function to handle the end boss character getting hurt.
+   */
   endBossHurt() {
     if (this.endBossEnergy >= 20) {
       this.endBossEnergy -= 20;
@@ -81,10 +85,18 @@ class Endboss extends MoveableObject {
     }
   }
 
+
+  /**
+   * Resets the end boss character's energy level.
+   */
   reset() {
     this.endBossEnergy = 100;
   }
 
+  
+  /**
+   * Plays the sound for the end boss character getting hurt.
+   */
   playEndbossHurtSound(){
     this.endBoss_hurt_sound.volume = 0.1;
     this.endBoss_hurt_sound.play();

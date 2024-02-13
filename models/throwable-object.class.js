@@ -34,6 +34,10 @@ class ThrowableObject extends MoveableObject {
     this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
   }
 
+
+  /**
+   * Initiates the throw animation.
+   */
   throw() {
     this.throwInterval = setInterval(() => {
       if (this.y >= 330) {
@@ -47,20 +51,36 @@ class ThrowableObject extends MoveableObject {
     this.reduceBottlesStatusBar();
   }
 
+
+  /**
+   * Handles the event when the throwable object hits the ground.
+   */
   bottleHitsGround() {
     clearInterval(this.throwInterval);
     this.splashBottle();
   }
 
+
+  /**
+   * Initiates the rotation animation of the throwable object.
+   */
   rotateBottle() {
     this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
   }
 
+
+  /**
+   * Moves the throwable object sideways during the throw animation.
+   */
   moveBottleSideways() {
     this.x += 20;
   }
 
+
+  /**
+   * Starts the gravity effect on the throwable object.
+   */
   startBottleGravity() {
     this.gravityInterval = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -70,10 +90,18 @@ class ThrowableObject extends MoveableObject {
     }, 1000 / 25);
   }
 
+
+  /**
+   * Reduces the bottle status bar when a bottle is thrown.
+   */
   reduceBottlesStatusBar() {
     this.statusBarBottles.reduceBottlesStatusBar();
   }
 
+
+  /**
+   * Initiates the splash animation of the throwable object.
+   */
   splashBottle() {
     this.playBottleSplashSound();
     clearInterval(this.throwInterval);
@@ -83,11 +111,19 @@ class ThrowableObject extends MoveableObject {
     this.removeBottleSplash();
   }
 
+
+  /**
+   * Plays the sound of the bottle splash.
+   */
   playBottleSplashSound(){
     this.bottleSplash_sound.volume = 0.1;
     this.bottleSplash_sound.play();
   }
 
+  
+  /**
+   * Removes the splash animation after a certain duration.
+   */
   removeBottleSplash(){
     setTimeout(() => {
       this.img = new Image();

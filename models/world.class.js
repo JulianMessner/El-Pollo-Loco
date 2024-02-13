@@ -15,12 +15,8 @@ class World {
   statusBar_Coins = new StatusBar_Coins();
   statusBar_EndBoss = new StatusBar_EndBoss();
   throwableObjects = [];
-  bottle_sound = allSounds[2];
-  coin_sound = allSounds[3];
   collectedBottles = 0;
   collectedCoins = 0;
-  cheering_sound = allSounds[9];
-  lost_sound = allSounds[10];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -31,6 +27,10 @@ class World {
     this.run();
   }
 
+
+  /**
+   * Resets the level by respawning enemies, bottles, and coins.
+   */
   resetLevel() {
     this.level.bottles = [];
     this.level.coins = [];
@@ -51,63 +51,68 @@ class World {
     this.level.enemies.push(new Endboss());
   }
 
+
+  /**
+   * Restarts the game by resetting energies, level, and intervals.
+   */
   restartGame() {
     this.resetEnergies();
     this.resetLevel();
     this.clearRunAndBossInterval();
     this.run();
-    this.cheering_sound.pause();
-    this.lost_sound.pause();
   }
 
+
+  /**
+   * Resets the energy of enemies and the player character.
+   */
   resetEnergies() {
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
         enemy.reset();
       }
     });
-
     this.character.resetCharacterEnergy();
   }
 
+
+  /**
+   * Displays the game won screen, plays cheering sound and clears intervals.
+   */
   gameWon() {
     let wonScreen = document.getElementById("gameWonScreen");
     wonScreen.style.display = "flex";
-    this.playWonSound();
+    playWonSound();
     this.clearRunAndBossInterval();
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
   }
 
-  playWonSound() {
-    this.cheering_sound.play();
-    this.cheering_sound.volume = 0.3;
-  }
 
+  /**
+   * Displays the game lost screen, plays loose sound and clears intervals.
+   */
   gameLost() {
     let lostScreen = document.getElementById("gameLostScreen");
     lostScreen.style.display = "flex";
-    this.playLostSound();
+    playLostSound();
     this.clearRunAndBossInterval();
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
   }
+  
 
-  playLostSound() {
-    this.lost_sound.play();
-    this.lost_sound.volume = 0.3;
-  }
-
+  /**
+   * Sets references to the world in character class.
+   */
   setWorld() {
     this.character.world = this;
-
-    this.level.enemies.forEach((enemy) => {
-      if (enemy instanceof Endboss) {
-        enemy.world = this;
-      }
-    });
   }
 
+
+  /**
+   * Updates the behavior of the end boss based on the player's position.
+   */
   updateBossBehavior() {
     const endboss = this.level.enemies.find(
       (enemy) => enemy instanceof Endboss
@@ -129,6 +134,10 @@ class World {
     }
   }
 
+
+  /**
+   * Starts the game loop and checks collisions and distance between character and endboss.
+   */
   run() {
     this.runInterval = setInterval(() => {
       this.checkCollisions();
@@ -143,11 +152,19 @@ class World {
     }, 100);
   }
 
+
+  /**
+   * Clears the game loop intervals.
+   */
   clearRunAndBossInterval() {
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
   }
 
+
+  /**
+   * Checks if the character can throw objects and handles the throwing action.
+   */
   checkThrowObjects() {
     if (this.keyboard.D && this.collectedBottles > 0) {
       let bottle = new ThrowableObject(
@@ -161,6 +178,10 @@ class World {
     }
   }
 
+
+  /**
+   * Checks collisions between the character and enemies, handles damage, and enemy deaths.
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -178,6 +199,10 @@ class World {
     });
   }
 
+
+  /**
+   * Checks collisions between the character and bottles, and removes collected bottles.
+   */
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
@@ -186,6 +211,10 @@ class World {
     });
   }
 
+
+  /**
+   * Checks collisions between throwable objects and the end boss, and handles damage to the end boss.
+   */
   checkCollisionsWithThrowables() {
     this.throwableObjects.forEach((throwableObject) => {
       if (!throwableObject.collidedWithEndBoss) {
@@ -194,6 +223,10 @@ class World {
     });
   }
 
+
+  /**
+   * Checks collision between a throwable object and the end boss, and handles the damage dealt to the end boss.
+   */
   checkCollisionWithEndboss(throwableObject) {
     const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
     if (endboss && throwableObject.isColliding(endboss)) {
@@ -210,6 +243,10 @@ class World {
     }
   }
 
+
+  /**
+   * Checks collisions between the character and coins, and removes collected coins.
+   */
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
@@ -218,6 +255,10 @@ class World {
     });
   }
 
+
+  /**
+   * Removes a throwable object from the game world.
+   */
   removeThrowableObject(throwableObject) {
     const index = this.throwableObjects.indexOf(throwableObject);
     if (index !== -1) {
@@ -225,72 +266,75 @@ class World {
     }
   }
 
+
+  /**
+   * Removes a bottle from the game world and updates the bottle status bar.
+   */
   removeBottle(bottle) {
     const index = this.level.bottles.indexOf(bottle);
     if (index !== -1) {
       this.statusBar_Bottles.collectBottle();
       this.level.bottles.splice(index, 1);
       this.collectedBottles++;
-      this.playBottleSound();
+      playBottleSound();
     }
   }
 
-  playBottleSound() {
-    this.bottle_sound.volume = 0.5;
-    this.bottle_sound.play();
-  }
 
+   /**
+   * Removes a coin from the game world and updates the coin status bar.
+   */
   removeCoin(coin) {
     const index = this.level.coins.indexOf(coin);
     if (index !== -1) {
       this.statusBar_Coins.collectCoin();
       this.level.coins.splice(index, 1);
       this.collectedCoins++;
-      this.playCoinSound();
+      playCoinSound();
     }
   }
 
-  playCoinSound() {
-    this.coin_sound.volume = 0.5;
-    this.coin_sound.play();
-  }
 
+  /**
+   * Draws the game world on the canvas.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
     this.ctx.translate(-this.camera_x, 0); // Back
     this.ctx.translate(this.camera_x, 0); // Forward
-
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(
-      this.level.bottles.filter((bottle) => !bottle.removed)
-    );
+    this.addObjectsToMap(this.level.bottles.filter((bottle) => !bottle.removed));
     this.addObjectsToMap(this.level.coins.filter((bottle) => !bottle.removed));
     this.addObjectsToMap(this.throwableObjects);
-
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar_Bottles);
     this.addToMap(this.statusBar_Coins);
     this.addToMap(this.statusBar_Health);
     this.addToMap(this.statusBar_EndBoss);
-
-    //draw() wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
 
+
+  /**
+   * Adds objects to be drawn to the map.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+
+  /**
+   * Draws a moveable object on the canvas.
+   */
   addToMap(moveableObject) {
     if (moveableObject.otherDirection) {
       this.flipImage(moveableObject);
@@ -298,13 +342,15 @@ class World {
 
     moveableObject.draw(this.ctx);
 
-    // moveableObject.drawFrame(this.ctx);
-
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }
   }
 
+
+  /**
+   * Flips the image horizontally for moveable objects.
+   */
   flipImage(moveableObject) {
     this.ctx.save();
     this.ctx.translate(moveableObject.width, 0);
@@ -312,6 +358,10 @@ class World {
     moveableObject.x = moveableObject.x * -1;
   }
 
+
+  /**
+   * Restores the image's original orientation after flipping.
+   */
   flipImageBack(moveableObject) {
     moveableObject.x = moveableObject.x * -1;
     this.ctx.restore();

@@ -20,12 +20,22 @@ class StatusBar_Health extends DrawableObject {
     this.setPercentage(100);
   }
 
+
+  /**
+   * Sets the percentage of the player's health in the status bar.
+   * @param {number} percentage - The percentage of the player's health to set.
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  
+  /**
+   * Resolves the index of the image path based on the current percentage.
+   * @returns {number} The index of the image path.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

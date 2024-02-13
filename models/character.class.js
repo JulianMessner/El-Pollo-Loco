@@ -85,6 +85,10 @@ class Character extends MoveableObject {
     this.startAnimating();
   }
 
+
+  /**
+   * Starts animating the character.
+   */
   startAnimating() {
     this.moveInterval = setInterval(() => {
       this.moveCharacter();
@@ -96,6 +100,10 @@ class Character extends MoveableObject {
     }, 100);
   }
 
+
+  /**
+   * Moves the character based on keyboard input.
+   */
   moveCharacter() {
     this.running_sound.pause();
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -120,20 +128,36 @@ class Character extends MoveableObject {
     }
   }
 
+
+  /**
+   * Plays the running sound.
+   */
   playRunningSound() {
     this.running_sound.volume = 0.5;
     this.running_sound.play();
   }
 
+
+  /**
+   * Plays the jumping sound.
+   */
   playJumpingSound() {
     this.jumping_sound.volume = 0.5;
     this.jumping_sound.play();
   }
 
+
+  /**
+   * Updates the camera position based on character movement.
+   */
   updateCameraPosition() {
     this.world.camera_x = -this.x + 100;
   }
 
+
+  /**
+   * Updates the character state for animation.
+   */
   updateCharacterState() {
     const currentTime = new Date().getTime();
     const timeSinceLastKeyPress = (currentTime - this.lastKeyPressTime) / 1000;
@@ -152,6 +176,10 @@ class Character extends MoveableObject {
     }
   }
 
+
+  /**
+   * Handles character death.
+   */
   handleCharacterDeath() {
     this.playAnimation(this.CHARACTER_DEAD);
     this.removeCharacter();
@@ -159,6 +187,10 @@ class Character extends MoveableObject {
     this.world.gameLost();
   }
 
+
+  /**
+   * Removes the character from the game by creating new empty image.
+   */
   removeCharacter() {
     setTimeout(() => {
       this.img = new Image();
@@ -166,11 +198,19 @@ class Character extends MoveableObject {
     }, 80);
   }
 
+
+  /**
+   * Stops the character animation.
+   */
   stopAnimating() {
     clearInterval(this.moveInterval);
     clearInterval(this.characterStateInterval);
   }
 
+  
+  /**
+   * Resets the character's energy.
+   */
   resetCharacterEnergy() {
     this.energy = 100;
   }

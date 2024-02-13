@@ -23,6 +23,10 @@ class Chicken extends MoveableObject {
     this.animate();
   }
 
+
+  /**
+   * Animates the chicken.
+   */
   animate() {
     this.walkingInterval = setInterval(() => {
       this.x -= this.speed;
@@ -33,6 +37,10 @@ class Chicken extends MoveableObject {
     }, 100);
   }
 
+
+  /**
+   * Handles the chicken's death animation.
+   */
   die() {
     this.stopWalkingAnimation();
     this.playAnimation(this.CHICKEN_DEAD);
@@ -40,11 +48,19 @@ class Chicken extends MoveableObject {
     this.removeChicken();
   } 
   
+
+  /**
+   * Stops the walking animation of the chicken.
+   */
   stopWalkingAnimation() {
     clearInterval(this.walkingInterval);
     clearInterval(this.walkingAnimationInterval);
   }
 
+
+  /**
+   * Removes the chicken from the game.
+   */
   removeChicken(){
     setTimeout(() => {
       this.img = new Image();
@@ -52,13 +68,12 @@ class Chicken extends MoveableObject {
     }, 70);
   }
 
+  
+  /**
+   * Plays the sound when chicken dies.
+   */
   playChickenDeadSound(){
     this.chicken_sound.volume = 0.1;
     this.chicken_sound.play();
-  }
-
-  stopIntervals() {
-    clearInterval(this.walkingInterval);
-    clearInterval(this.walkingAnimationInterval);
   }
 }

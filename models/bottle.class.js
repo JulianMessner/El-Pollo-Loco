@@ -15,16 +15,28 @@ class Bottle extends MoveableObject {
     this.animate();
   }
 
+
+  /**
+   * Removes the bottle from the game by putting removed on true.
+   */
   removeBottle() {
     this.removed = true;
   }
 
+
+  /**
+   * Animates the bottle by cycling through its images.
+   */
   animate() {
     this.bottleInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_GROUND);
     }, 200);
   }
 
+  
+   /**
+   * Stops the bottle animation.
+   */
   stopBottleAnimation() {
     clearInterval(this.bottleInterval);
   }
