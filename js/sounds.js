@@ -11,7 +11,6 @@ let allSounds = [
   new Audio("audio/cheering.mp3"),
   new Audio("audio/gameOver.mp3"),
 ];
-
 let sound = false;
 
 function init() {

@@ -22,25 +22,40 @@ async function playGame() {
 }
 
 function startGame() {
-  let canvas = document.getElementById("canvas");
+  hideElements();
+  showElements();
+  createWorldInstance();
+}
+
+function hideElements() {
   let startButton = document.getElementById("startGameButton");
   let loadingScreen = document.getElementById("loadingScreen");
-  let mobileKeys = document.getElementById("mobileKeysOverlay");
   let storyButton = document.getElementById("storyButton");
+  let startScreen = document.getElementById("startScreen");
 
   startButton.style.display = "none";
   loadingScreen.style.display = "none";
   storyButton.style.zIndex = "-100";
+  startScreen.style.display = "none";
+}
+
+function showElements() {
+  let canvas = document.getElementById("canvas");
+  let mobileKeys = document.getElementById("mobileKeysOverlay");
+
   canvas.style.display = "block";
   mobileKeys.style.display = "flex";
-  startScreen.style.display = "none";
+}
 
+function createWorldInstance() {
+  let canvas = document.getElementById("canvas");
   worldInstance = new World(canvas, keyboard);
 
   if (worldInstance) {
     worldInstance.restartGame();
   }
 }
+
 
 function backToHome() {
   let lostScreen = document.getElementById("gameLostScreen");
@@ -112,8 +127,7 @@ function toggleFullScreen() {
   } else if (showFullScreen === true) {
     enterFullscreen(fullScreen);
     showFullScreen = false;
-    fullScreen.style.backgroundImage =
-      "url(./img/5_background/layers/background-desert.png)";
+    fullScreen.style.backgroundImage = "url(./img/5_background/layers/background-desert.png)";
   }
 }
 

@@ -121,7 +121,7 @@ class Character extends MoveableObject {
       const currentTime = new Date().getTime();
       const timeSinceLastKeyPress = (currentTime - this.lastKeyPressTime) / 1000;
   
-      if (this.energy <= 0) {
+      if (this.energy <= 20) {
         this.playAnimation(this.CHARACTER_DEAD);
         setTimeout(() => {
           this.img = new Image();
