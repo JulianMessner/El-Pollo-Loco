@@ -155,15 +155,11 @@ function closeStoryDiv() {
  * Toggles the full screen mode.
  */
 function toggleFullScreen() {
-  let fullScreen = document.getElementById("fullScreen");
-  if (showFullScreen === false) {
+  let gameScreen = document.getElementById("gameScreen");
+  if (!document.fullscreenElement) {
+    enterFullscreen(gameScreen);
+  } else {
     exitFullscreen();
-    showFullScreen = true;
-    fullScreen.style.backgroundImage = "none";
-  } else if (showFullScreen === true) {
-    enterFullscreen(fullScreen);
-    showFullScreen = false;
-    fullScreen.style.backgroundImage = "url(./img/5_background/layers/background-desert.png)";
   }
 }
 
@@ -174,9 +170,28 @@ function toggleFullScreen() {
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
+    applyFullScreenStyles();
   } else if (element.webkitRequestFullscreen) {
     element.webkitRequestFullscreen();
+    applyFullScreenStyles();
   }
+}
+
+/**
+ * Adds full screen styles for elements.
+ */
+function applyFullScreenStyles() {
+  let startScreenDiv = document.getElementById("startScreen");
+  let canvas = document.getElementById("canvas");
+  let loadingScreen = document.getElementById("loadingScreen");
+
+  startScreenDiv.style.width = "100%";
+  startScreenDiv.style.height = "100%";
+  startScreenDiv.style.backgroundSize = "100% 100%";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  loadingScreen.style.width = "100%";
+  loadingScreen.style.height = "100%";
 }
 
 
@@ -186,9 +201,29 @@ function enterFullscreen(element) {
 function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
+    removeFullScreenStyles();
   } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
+    removeFullScreenStyles();
   }
+}
+
+
+/**
+ * Removes full screen styles for elements.
+ */
+function removeFullScreenStyles(){
+  let startScreenDiv = document.getElementById("startScreen");
+  let canvas = document.getElementById("canvas");
+  let loadingScreen = document.getElementById("loadingScreen");
+
+  startScreenDiv.style.width = "720px";
+  startScreenDiv.style.height = "480px";
+  startScreenDiv.style.backgroundSize = "720px 480px";
+  canvas.style.width = "auto";
+  canvas.style.height = "auto%";
+  loadingScreen.style.width = "720px";
+  loadingScreen.style.height = "480px";
 }
 
 
