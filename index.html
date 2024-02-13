@@ -54,12 +54,31 @@
                     <button class="backHomeButton" onclick="backToHome()">HOME</button>
                 </div>
             </div>
+            <div class="storyButton" id="storyButton" onclick="openStoryDiv()" style="display: flex;">
+                <img id="storyIcon" src="./img/10_icons/book.png">
+            </div>
             <div class="buttons">
                 <img id="volumeIcon" onclick="toggleSound()" src="./img/10_icons/volume-off.png">
                 <img id="fullScreenIcon" onclick="toggleFullScreen()" src="./img/10_icons/full-screen.png">
                 <img id="infoIcon" onclick="toggleInfoDiv()" src="./img/10_icons/info.png">
                 <a id="privacyPolicyLink" href="./html/imprint-privacy-policy.html" target="_blank"><img
                         src="./img/10_icons/privacy.png"></a>
+            </div>
+            <div id="storyDiv">
+                <button id="closeStoryDiv" onclick="closeStoryDiv()">
+                    <img src="./img/10_icons/close.png">
+                </button>
+                <div id="storyText">
+                    <p>Pepe, ein tapferer Meister aus dem Dorf Fowlsville, durchstreift die Wüste auf der Suche nach dem
+                        gefürchteten Megahuhn. Sein Dorf leidet unter den ständigen Angriffen dieser mächtigen Kreatur.
+                    </p><br>
+                    <p>Begleite Pepe auf seinem Abenteuer, während er sich durch die Wüste kämpft um den ultimativen
+                        Kampf gegen den Megachicken zu bestehen und sein Dorf zu retten!</p><br>
+                    <p>Bereit für die Herausforderung?</p>
+                    <div class="imagesInStoryDiv">
+                        <img id="endbossImg" src="./img/4_enemie_boss_chicken/3_attack/G13.png">
+                    </div>
+                </div>
             </div>
             <div id="infoDiv" style="display: none;">
                 <p>Left-Key = Move Left</p>

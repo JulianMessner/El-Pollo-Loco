@@ -8,6 +8,7 @@ async function playGame() {
   let loadingScreen = document.getElementById("loadingScreen");
   let gameLostScreen = document.getElementById("gameLostScreen");
   let wonScreen = document.getElementById("gameWonScreen");
+
   allSounds[9].pause();
   allSounds[10].pause();
 
@@ -25,9 +26,11 @@ function startGame(){
   let startButton = document.getElementById("startGameButton");
   let loadingScreen = document.getElementById("loadingScreen");
   let mobileKeys = document.getElementById("mobileKeysOverlay");
+  let storyButton = document.getElementById("storyButton");
 
   startButton.style.display = "none";
   loadingScreen.style.display = "none";
+  storyButton.style.zIndex = "-100";
   canvas.style.display = "block";
   mobileKeys.style.display = "flex";
   
@@ -47,11 +50,13 @@ function backToHome(){
   let startScreen = document.getElementById("startScreen");
   let wonScreen = document.getElementById("gameWonScreen");
   let mobileKeys = document.getElementById("mobileKeysOverlay");
+  let storyButton = document.getElementById("storyButton");
 
 
   lostScreen.style.display = "none";
   wonScreen.style.display = "none";
   canvas.style.display = "none";
+  storyButton.style.zIndex = "1";
   startButton.style.display = "flex";
   startScreen.style.display = "flex";
   mobileKeys.style.display = "none";
@@ -75,6 +80,26 @@ function closeInfoDivOutside(event) {
       infoDiv.style.display = 'none';
       document.removeEventListener('click', closeInfoDivOutside);
   }
+}
+
+document.addEventListener("click", function(event) {
+  let storyDiv = document.getElementById("storyDiv");
+  let gameScreen = document.getElementById("gameScreen");
+
+  if (!gameScreen.contains(event.target) && storyDiv.style.display === "flex") {
+      storyDiv.style.display = "none";
+  }
+});
+
+
+function openStoryDiv(){
+  let storyDiv = document.getElementById("storyDiv");
+  storyDiv.style.display = "flex";
+}
+
+function closeStoryDiv(){
+  let storyDiv = document.getElementById("storyDiv");
+  storyDiv.style.display = "none";
 }
 
 function toggleFullScreen(){

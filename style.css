@@ -8,6 +8,7 @@ body {
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     margin: 0;
     height: 100vh;
+    overflow-y: hidden;
 }
 
 #fullScreen {
@@ -137,18 +138,99 @@ canvas {
     justify-content: space-between;
 }
 
-.buttons img {
+#storyButton{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(123, 180, 221, 0.3);
+    padding: 10px;
+    border-radius: 50%;
+    border: 1px solid black;
+    width: auto;
+    align-items: center;
+    justify-content: start;
+}
+
+.buttons img,
+.storyButton img {
     height: 30px;
     width: 30px;
 }
 
-.buttons img:hover {
+.buttons img:hover,
+.storyButton img:hover,
+#closeStoryDiv img:hover {
     cursor: pointer;
     filter: brightness(0) saturate(100%) invert(90%) sepia(16%) saturate(6526%) hue-rotate(359deg) brightness(92%) contrast(103%);
 }
 
 #privacyPolicyLink{
     display: flex;
+}
+
+#storyDiv {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(242, 143, 63, 0.9);
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 10px;
+    width: auto;
+    height: 440px;
+    font-size: 28px;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow-y: hidden;
+}
+
+#storyDiv p{
+    margin: 0;
+}
+
+#storyText{
+    padding: 20px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+#endbossImg{
+    height: 200px;
+    width: auto;
+}
+
+#characterImg{
+    height: 150px;
+    width: auto;
+}
+
+#closeStoryDiv{
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#closeStoryDiv img{
+    height: 20px;
+    width: 20px;
+}
+
+.imagesInStoryDiv{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 10px;
+    gap: 20px;
 }
 
 #infoDiv {

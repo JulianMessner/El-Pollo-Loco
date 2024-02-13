@@ -6,7 +6,14 @@
 
     #startScreen {
         width: 100vw;
-        background-size: 100% 100%;
+        background-size: 100vw 100%;
+        border-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 640px){
+    .imagesInStoryDiv{
+        display: none;
     }
 }
 
@@ -30,6 +37,10 @@
     }
 
     h1 {
+        display: none;
+    }
+
+    .imagesInStoryDiv{
         display: none;
     }
 }
