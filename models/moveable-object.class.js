@@ -17,7 +17,7 @@ class MoveableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject){ // Throwable object should always fall
+    if (this instanceof ThrowableObject){
         return true;
     } else {    
         return this.y < 155;
@@ -57,8 +57,7 @@ class MoveableObject extends DrawableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % images.length; // dasselbe wie z.B. let i = 0 % 6; ->  0:6 = 0,Rest 0
-    // i = 0, 1, 2, 3, 4, 5, 6, dann 0, 1, 2, 3, 4, 5, ...
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;

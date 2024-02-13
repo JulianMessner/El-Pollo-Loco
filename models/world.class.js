@@ -33,34 +33,28 @@ class World {
 
   resetLevel() {
     this.level.bottles = [];
+    this.level.coins = [];
+    this.level.enemies = [];
 
     for (let i = 0; i < 5; i++) {
       this.level.bottles.push(new Bottle());
     }
-
-    this.level.coins = [];
-
     for (let i = 0; i < 5; i++) {
       this.level.coins.push(new Coin());
     }
-
-    this.level.enemies = [];
-
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new Chicken());
     }
-
     for (let i = 0; i < 3; i++) {
       this.level.enemies.push(new ChickenSmall());
     }
-
     this.level.enemies.push(new Endboss());
   }
 
   restartGame() {
     this.resetEnergies();
     this.resetLevel();
-    this.stopRunInterval();
+    this.clearRunAndBossInterval();
     this.run();
     this.cheering_sound.pause();
     this.lost_sound.pause();
@@ -79,21 +73,29 @@ class World {
   gameWon() {
     let wonScreen = document.getElementById("gameWonScreen");
     wonScreen.style.display = "flex";
-    this.cheering_sound.play();
-    this.cheering_sound.volume = 0.3;
-    this.stopRunInterval();
+    this.playWonSound();
+    this.clearRunAndBossInterval();
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
+  }
+
+  playWonSound() {
+    this.cheering_sound.play();
+    this.cheering_sound.volume = 0.3;
   }
 
   gameLost() {
     let lostScreen = document.getElementById("gameLostScreen");
     lostScreen.style.display = "flex";
-    this.lost_sound.play();
-    this.lost_sound.volume = 0.3;
-    this.stopRunInterval();
+    this.playLostSound();
+    this.clearRunAndBossInterval();
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
+  }
+
+  playLostSound() {
+    this.lost_sound.play();
+    this.lost_sound.volume = 0.3;
   }
 
   setWorld() {
@@ -107,25 +109,25 @@ class World {
   }
 
   updateBossBehavior() {
-    if (this.level.enemies[this.level.enemies.length - 1].endBossEnergy <= 0) {
+    const endboss = this.level.enemies.find(
+      (enemy) => enemy instanceof Endboss
+    );
+    const distanceToBoss = Math.abs(this.character.x - endboss.x);
+    if (!endboss || endboss.endBossEnergy <= 0) {
       return;
     }
-    const distanceToBoss = Math.abs(this.character.x - this.level.enemies[this.level.enemies.length - 1].x);
-    if ((distanceToBoss < 450) && (distanceToBoss > 250)) {
-      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_WALKING);
-      if (this.character.x < this.level.enemies[this.level.enemies.length - 1].x) {
-        this.level.enemies[this.level.enemies.length - 1].moveLeft();
+    if (distanceToBoss < 450 && distanceToBoss > 250) {
+      endboss.playAnimation(endboss.ENDBOSS_WALKING);
+      if (this.character.x < endboss.x) {
+        endboss.moveLeft();
       }
     } else if (distanceToBoss < 250) {
-      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_ATTACK);
-      this.level.enemies[this.level.enemies.length - 1].moveLeft();
+      endboss.playAnimation(endboss.ENDBOSS_ATTACK);
+      endboss.moveLeft();
     } else {
-      this.level.enemies[this.level.enemies.length - 1].playAnimation(this.level.enemies[this.level.enemies.length - 1].ENDBOSS_ALERT);
-      if (this.character.x < this.level.enemies[this.level.enemies.length - 1].x) {
-      }
+      endboss.playAnimation(endboss.ENDBOSS_ALERT);
     }
   }
-  
 
   run() {
     this.runInterval = setInterval(() => {
@@ -141,7 +143,7 @@ class World {
     }, 100);
   }
 
-  stopRunInterval(){
+  clearRunAndBossInterval() {
     clearInterval(this.runInterval);
     clearInterval(this.checkDistanceToEndboss);
   }
@@ -187,24 +189,25 @@ class World {
   checkCollisionsWithThrowables() {
     this.throwableObjects.forEach((throwableObject) => {
       if (!throwableObject.collidedWithEndBoss) {
-        this.level.enemies.forEach((enemy) => {
-          if (throwableObject.isColliding(enemy)) {
-            throwableObject.collidedWithEndBoss = true;
-            throwableObject.splashBottle();
-            setTimeout(() => {
-              this.removeThrowableObject(throwableObject);
-            }, 200);
-            if (enemy instanceof Endboss) {
-              enemy.endBossHurt();
-              this.statusBar_EndBoss.setPercentage(enemy.endBossEnergy);
-              if(enemy.endBossEnergy <= 0){
-                this.gameWon();
-              }
-            }
-          }
-        });
+        this.checkCollisionWithEndboss(throwableObject);
       }
     });
+  }
+
+  checkCollisionWithEndboss(throwableObject) {
+    const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
+    if (endboss && throwableObject.isColliding(endboss)) {
+      throwableObject.collidedWithEndBoss = true;
+      throwableObject.splashBottle();
+      setTimeout(() => {
+        this.removeThrowableObject(throwableObject);
+      }, 500);
+      endboss.endBossHurt();
+      this.statusBar_EndBoss.setPercentage(endboss.endBossEnergy);
+      if (endboss.endBossEnergy <= 0) {
+        this.gameWon();
+      }
+    }
   }
 
   checkCollisionsWithCoins() {
@@ -227,11 +230,14 @@ class World {
     if (index !== -1) {
       this.statusBar_Bottles.collectBottle();
       this.level.bottles.splice(index, 1);
-
       this.collectedBottles++;
-      this.bottle_sound.volume = 0.5;
-      this.bottle_sound.play();
+      this.playBottleSound();
     }
+  }
+
+  playBottleSound() {
+    this.bottle_sound.volume = 0.5;
+    this.bottle_sound.play();
   }
 
   removeCoin(coin) {
@@ -239,11 +245,14 @@ class World {
     if (index !== -1) {
       this.statusBar_Coins.collectCoin();
       this.level.coins.splice(index, 1);
-
       this.collectedCoins++;
-      this.coin_sound.volume = 0.5;
-      this.coin_sound.play();
+      this.playCoinSound();
     }
+  }
+
+  playCoinSound() {
+    this.coin_sound.volume = 0.5;
+    this.coin_sound.play();
   }
 
   draw() {

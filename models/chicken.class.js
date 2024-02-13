@@ -17,7 +17,7 @@ class Chicken extends MoveableObject {
     super().loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.CHICKEN_WALKING);
     this.loadImages(this.CHICKEN_DEAD);
-    this.x = 400 + Math.random() * 3500;
+    this.x = 400 + Math.random() * 3000;
     this.y = 350;
     this.speed = 0.65 + Math.random() * 1.95;
     this.animate();
@@ -26,10 +26,8 @@ class Chicken extends MoveableObject {
   animate() {
     this.walkingInterval = setInterval(() => {
       this.x -= this.speed;
-    }, 1000 / 60); //60x pro Sekunde wird diese Funktion ausgeführt
-
+    }, 1000 / 60);
     this.moveLeft();
-
     this.walkingAnimationInterval = setInterval(() => {
       this.playAnimation(this.CHICKEN_WALKING);
     }, 100);
@@ -38,18 +36,29 @@ class Chicken extends MoveableObject {
   die() {
     this.stopWalkingAnimation();
     this.playAnimation(this.CHICKEN_DEAD);
-    this.chicken_sound.volume = 0.1;
-    this.chicken_sound.play();
-  
-    setTimeout(() => {
-      this.img = new Image();
-      this.y = 0;
-    }, 70);
+    this.playChickenDeadSound();
+    this.removeChicken();
   } 
   
   stopWalkingAnimation() {
     clearInterval(this.walkingInterval);
     clearInterval(this.walkingAnimationInterval);
   }
-  
+
+  removeChicken(){
+    setTimeout(() => {
+      this.img = new Image();
+      this.y = 0;
+    }, 70);
+  }
+
+  playChickenDeadSound(){
+    this.chicken_sound.volume = 0.1;
+    this.chicken_sound.play();
+  }
+
+  stopIntervals() {
+    clearInterval(this.walkingInterval);
+    clearInterval(this.walkingAnimationInterval);
+  }
 }

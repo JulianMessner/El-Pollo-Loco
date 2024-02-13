@@ -21,32 +21,31 @@ function toggleSound() {
   let volumeIcon = document.getElementById("volumeIcon");
 
   if (sound) {
-      volumeIcon.src = "./img/10_icons/volume-off.png";
-      muteSound();
+    volumeIcon.src = "./img/10_icons/volume-off.png";
+    muteSound();
   } else {
-      volumeIcon.src = "./img/10_icons/volume-on.png";
-      unmuteSound();
+    volumeIcon.src = "./img/10_icons/volume-on.png";
+    unmuteSound();
   }
 }
 
 function muteSound() {
-  allSounds.forEach(sound => {
-      sound.muted = true;
-      sound.pause();
+  allSounds.forEach((sound) => {
+    sound.muted = true;
+    sound.pause();
   });
   sound = false;
 }
 
 function unmuteSound() {
-  allSounds.forEach(sound => {
-      sound.muted = false;
+  allSounds.forEach((sound) => {
+    sound.muted = false;
   });
   sound = true;
 
   if (sound) {
     allSounds[8].play();
-    allSounds[8].volume = 0.2;
+    allSounds[8].volume = 0.1;
     allSounds[8].loop = true;
+  }
 }
-}
-

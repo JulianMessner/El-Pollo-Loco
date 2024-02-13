@@ -26,6 +26,7 @@ class ThrowableObject extends MoveableObject {
     this.y = y;
     this.height = 60;
     this.width = 50;
+    this.speedY = 30;
     this.statusBarBottles = statusBarBottles;
     this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     this.throw();
@@ -34,22 +35,33 @@ class ThrowableObject extends MoveableObject {
   }
 
   throw() {
-    this.speedY = 30;
-
     this.throwInterval = setInterval(() => {
       if (this.y >= 330) {
-        clearInterval(this.throwInterval);
-        this.splashBottle();
-
+        this.bottleHitsGround();
       } else {
-        this.loadImages(this.IMAGES_BOTTLE_ROTATION);
-        this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
-        this.x += 20;
+        this.rotateBottle();
+        this.moveBottleSideways();
       }
     }, 80);
+    this.startBottleGravity();
+    this.reduceBottlesStatusBar();
+  }
 
-    this.statusBarBottles.reduceBottlesStatusBar();
+  bottleHitsGround() {
+    clearInterval(this.throwInterval);
+    this.splashBottle();
+  }
 
+  rotateBottle() {
+    this.loadImages(this.IMAGES_BOTTLE_ROTATION);
+    this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
+  }
+
+  moveBottleSideways() {
+    this.x += 20;
+  }
+
+  startBottleGravity() {
     this.gravityInterval = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
@@ -58,15 +70,25 @@ class ThrowableObject extends MoveableObject {
     }, 1000 / 25);
   }
 
+  reduceBottlesStatusBar() {
+    this.statusBarBottles.reduceBottlesStatusBar();
+  }
 
   splashBottle() {
-    this.bottleSplash_sound.volume = 0.1;
-    this.bottleSplash_sound.play();
+    this.playBottleSplashSound();
     clearInterval(this.throwInterval);
     clearInterval(this.gravityInterval);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+    this.removeBottleSplash();
+  }
 
+  playBottleSplashSound(){
+    this.bottleSplash_sound.volume = 0.1;
+    this.bottleSplash_sound.play();
+  }
+
+  removeBottleSplash(){
     setTimeout(() => {
       this.img = new Image();
     }, 200);

@@ -61,25 +61,21 @@ class Endboss extends MoveableObject {
     if (this.endBossEnergy >= 20) {
       this.endBossEnergy -= 20;
       let animationIndex = 0;
-
-      this.endBoss_hurt_sound.volume = 0.1;
-      this.endBoss_hurt_sound.play();
-
+  
+      this.playEndbossHurtSound();
+  
       const intervalId = setInterval(() => {
         if (animationIndex < this.ENDBOSS_HURT.length) {
           this.playAnimation([this.ENDBOSS_HURT[animationIndex]]);
           animationIndex++;
-        } else if (this.endBossEnergy <= 0){
-          this.playAnimation(this.ENDBOSS_DEAD);
-          setTimeout(() => {
-            clearInterval(intervalId);
-            this.img = new Image();
-            this.y = 0;
-            clearInterval(intervalId);
-          }, 3000);
-        }
-        else {
+        } else {
           clearInterval(intervalId);
+          if (this.endBossEnergy <= 0) {
+            clearInterval(intervalId);
+            const deadIntervalId = setInterval(() => {
+              this.playAnimation(this.ENDBOSS_DEAD);
+            }, 200);
+          }
         }
       }, 100);
     }
@@ -87,5 +83,10 @@ class Endboss extends MoveableObject {
 
   reset() {
     this.endBossEnergy = 100;
+  }
+
+  playEndbossHurtSound(){
+    this.endBoss_hurt_sound.volume = 0.1;
+    this.endBoss_hurt_sound.play();
   }
 }
