@@ -88,6 +88,7 @@ function backToHome() {
   startButton.style.display = "flex";
   startScreen.style.display = "flex";
   mobileKeys.style.display = "none";
+  pauseWinLooseSounds();
 }
 
 
