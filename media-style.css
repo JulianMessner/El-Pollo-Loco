@@ -6,8 +6,13 @@
 
     #startScreen {
         width: 100vw;
+        height: 410px;
         background-size: 100vw 100%;
         border-radius: 0;
+    }
+
+    #loadingScreen{
+        height: 410px;
     }
 }
 
