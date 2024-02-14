@@ -180,24 +180,50 @@ class World {
 
 
   /**
-   * Checks collisions between the character and enemies, handles damage, and enemy deaths.
-   */
+  * Checks for collisions between the character and enemies.
+  */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        if (!this.character.isAboveGround()) {
-          this.character.hit();
-          this.statusBar_Health.setPercentage(this.character.energy);
-        } else if (
-          this.character.isAboveGround() &&
-          this.character.speedY < 0 &&
-          (enemy instanceof Chicken || enemy instanceof ChickenSmall)
-        ) {
-          enemy.die();
+        if (this.isCharacterCollidingWithEnemy(enemy)) {
+            this.handleCollision(enemy);
         }
-      }
     });
   }
+
+
+  /**
+  * Checks if the character is colliding with a specific enemy.
+  *
+  * @param {Object} enemy - The enemy to check for collision.
+  * @returns {boolean} - True if there is a collision, false otherwise.
+  */
+  isCharacterCollidingWithEnemy(enemy) {
+    return (
+        this.character.x + this.character.width > enemy.x &&
+        this.character.y + this.character.height > enemy.y &&
+        this.character.x < enemy.x + enemy.width &&
+        this.character.y < enemy.y + enemy.height
+    );
+  }
+
+  
+/**
+ * Handles actions when a collision between the character and an enemy occurs.
+ *
+ * @param {Object} enemy - The enemy with which the character collided.
+ */
+handleCollision(enemy) {
+    if (!this.character.isAboveGround()) {
+        this.character.hit();
+        this.statusBar_Health.setPercentage(this.character.energy);
+    } else if (
+        this.character.isAboveGround() &&
+        this.character.speedY < 0 &&
+        (enemy instanceof Chicken || enemy instanceof ChickenSmall)
+    ) {
+        enemy.die();
+    }
+}
 
 
   /**
