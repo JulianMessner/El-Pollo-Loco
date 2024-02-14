@@ -162,21 +162,21 @@ class World {
   }
 
 
-  /**
-   * Checks if the character can throw objects and handles the throwing action.
-   */
-  checkThrowObjects() {
-    if (this.keyboard.D && this.collectedBottles > 0) {
-      let bottle = new ThrowableObject(
-        this.character.x + 100,
-        this.character.y + 100,
-        this.statusBar_Bottles
-      );
-      this.throwableObjects.push(bottle);
-      this.collectedBottles--;
-      this.keyboard.D = false;
-    }
+/**
+ * Checks if the character can throw objects and handles the throwing action.
+ */
+checkThrowObjects() {
+  if (this.keyboard.D && !this.prevDState && this.collectedBottles > 0) {
+    let bottle = new ThrowableObject(
+      this.character.x + 100,
+      this.character.y + 100,
+      this.statusBar_Bottles
+    );
+    this.throwableObjects.push(bottle);
+    this.collectedBottles--;
   }
+  this.prevDState = this.keyboard.D;
+}
 
 
   /**
@@ -207,12 +207,12 @@ class World {
   }
 
   
-/**
- * Handles actions when a collision between the character and an enemy occurs.
- *
- * @param {Object} enemy - The enemy with which the character collided.
- */
-handleCollision(enemy) {
+  /**
+   * Handles actions when a collision between the character and an enemy occurs.
+   *
+   * @param {Object} enemy - The enemy with which the character collided.
+   */
+  handleCollision(enemy) {
     if (!this.character.isAboveGround()) {
         this.character.hit();
         this.statusBar_Health.setPercentage(this.character.energy);
@@ -251,10 +251,10 @@ checkCollisionsWithThrowables() {
 }
 
 
-/**
- * Checks collision between a throwable object and the end boss, and handles the damage dealt to the end boss.
- */
-checkCollisionWithEndboss(throwableObject) {
+  /**
+  * Checks collision between a throwable object and the end boss, and handles the damage dealt to the end boss.
+  */
+  checkCollisionWithEndboss(throwableObject) {
   const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
   if (endboss && throwableObject.isColliding(endboss)) {
     throwableObject.collidedWithEndBoss = true;
@@ -268,13 +268,13 @@ checkCollisionWithEndboss(throwableObject) {
       this.gameWon();
     }
   }
-}
+  }
 
 
-/**
- * Checks collision between a throwable object and other enemies, and handles the damage dealt to those enemies.
- */
-checkCollisionWithOtherEnemies(throwableObject) {
+  /**
+  * Checks collision between a throwable object and other enemies, and handles the damage dealt to those enemies.
+  */
+  checkCollisionWithOtherEnemies(throwableObject) {
   this.level.enemies.forEach((enemy) => {
     if (!(enemy instanceof Endboss) && throwableObject.isColliding(enemy)) {
       throwableObject.splashBottle();
@@ -284,9 +284,9 @@ checkCollisionWithOtherEnemies(throwableObject) {
       if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
         enemy.die();
       }
-    }
-  });
-}
+     }
+    });
+  }
 
 
   /**
