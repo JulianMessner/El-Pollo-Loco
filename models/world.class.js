@@ -238,36 +238,55 @@ handleCollision(enemy) {
   }
 
 
-  /**
-   * Checks collisions between throwable objects and the end boss, and handles damage to the end boss.
-   */
-  checkCollisionsWithThrowables() {
-    this.throwableObjects.forEach((throwableObject) => {
-      if (!throwableObject.collidedWithEndBoss) {
-        this.checkCollisionWithEndboss(throwableObject);
-      }
-    });
+/**
+ * Checks collisions between throwable objects and enemies, and handles damage to both the end boss and other enemies.
+ */
+checkCollisionsWithThrowables() {
+  this.throwableObjects.forEach((throwableObject) => {
+    if (!throwableObject.collidedWithEndBoss) {
+      this.checkCollisionWithEndboss(throwableObject);
+      this.checkCollisionWithOtherEnemies(throwableObject);
+    }
+  });
+}
+
+
+/**
+ * Checks collision between a throwable object and the end boss, and handles the damage dealt to the end boss.
+ */
+checkCollisionWithEndboss(throwableObject) {
+  const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
+  if (endboss && throwableObject.isColliding(endboss)) {
+    throwableObject.collidedWithEndBoss = true;
+    throwableObject.splashBottle();
+    setTimeout(() => {
+      this.removeThrowableObject(throwableObject);
+    }, 500);
+    endboss.endBossHurt();
+    this.statusBar_EndBoss.setPercentage(endboss.endBossEnergy);
+    if (endboss.endBossEnergy <= 0) {
+      this.gameWon();
+    }
   }
+}
 
 
-  /**
-   * Checks collision between a throwable object and the end boss, and handles the damage dealt to the end boss.
-   */
-  checkCollisionWithEndboss(throwableObject) {
-    const endboss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
-    if (endboss && throwableObject.isColliding(endboss)) {
-      throwableObject.collidedWithEndBoss = true;
+/**
+ * Checks collision between a throwable object and other enemies, and handles the damage dealt to those enemies.
+ */
+checkCollisionWithOtherEnemies(throwableObject) {
+  this.level.enemies.forEach((enemy) => {
+    if (!(enemy instanceof Endboss) && throwableObject.isColliding(enemy)) {
       throwableObject.splashBottle();
       setTimeout(() => {
         this.removeThrowableObject(throwableObject);
       }, 500);
-      endboss.endBossHurt();
-      this.statusBar_EndBoss.setPercentage(endboss.endBossEnergy);
-      if (endboss.endBossEnergy <= 0) {
-        this.gameWon();
+      if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
+        enemy.die();
       }
     }
-  }
+  });
+}
 
 
   /**
