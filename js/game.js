@@ -283,27 +283,35 @@ window.addEventListener("keyup", (event) => {
  */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("mobileLeft").addEventListener("touchstart", () => {
+    event.preventDefault();
     keyboard.LEFT = true;
   });
   document.getElementById("mobileLeft").addEventListener("touchend", () => {
+    event.preventDefault();
     keyboard.LEFT = false;
   });
   document.getElementById("mobileRight").addEventListener("touchstart", () => {
+    event.preventDefault();
     keyboard.RIGHT = true;
   });
   document.getElementById("mobileRight").addEventListener("touchend", () => {
+    event.preventDefault();
     keyboard.RIGHT = false;
   });
   document.getElementById("mobileJump").addEventListener("touchstart", () => {
+    event.preventDefault();
     keyboard.SPACE = true;
   });
   document.getElementById("mobileJump").addEventListener("touchend", () => {
+    event.preventDefault();
     keyboard.SPACE = false;
   });
   document.getElementById("mobileThrow").addEventListener("touchstart", () => {
+    event.preventDefault();
     keyboard.D = true;
   });
   document.getElementById("mobileThrow").addEventListener("touchend", () => {
+    event.preventDefault();
     keyboard.D = false;
   });
 });
