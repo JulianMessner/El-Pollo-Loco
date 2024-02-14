@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let showFullScreen = true;
 let worldInstance;
+let gameStarted = false;
 
 
 /**
@@ -19,6 +20,7 @@ async function playGame() {
   setTimeout(function () {
     startGame();
   }, 1000);
+  gameStarted = true;
 }
 
 
@@ -54,7 +56,35 @@ function showElements() {
   let canvas = document.getElementById("canvas");
   let mobileKeys = document.getElementById("mobileKeysOverlay");
   canvas.style.display = "block";
-  mobileKeys.style.display = "flex";
+  if (gameStarted && isMobileWithoutKeyboard()) {
+    mobileKeys.style.display = "flex";
+  } else {
+    mobileKeys.style.display = "none";
+  }
+}
+
+
+/**
+ * Adds an event listener for the 'resize' event to dynamically update the display of the mobileKeysOverlay.
+ */
+window.addEventListener("resize", function() {
+  let canvas = document.getElementById("canvas");
+  let mobileKeys = document.getElementById("mobileKeysOverlay");
+
+  if (gameStarted && canvas.style.display === "block" && isMobileWithoutKeyboard()) {
+    mobileKeys.style.display = "flex";
+  } else {
+    mobileKeys.style.display = "none";
+  }
+});
+
+
+/**
+ * Checks if device has no keyboard.
+ */
+function isMobileWithoutKeyboard() {
+  // Überprüfe den userAgent auf bestimmte Schlüsselwörter, die auf mobile Geräte ohne Tastatur hinweisen können
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 

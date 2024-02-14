@@ -62,7 +62,7 @@ class ChickenSmall extends MoveableObject {
   removeChicken(){
     setTimeout(() => {
       this.img = new Image();
-      this.y = 0;
+      this.y = -100;
     }, 80);
   }
 
