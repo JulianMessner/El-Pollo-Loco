@@ -232,7 +232,6 @@ class World {
     if (endboss && throwableObject.isColliding(endboss)) {
       throwableObject.collidedWithEndBoss = true;
       throwableObject.splashBottle();
-      // throwableObject.bottleSplash_sound.pause();
       setTimeout(() => {
         this.removeThrowableObject(throwableObject);
       }, 500);
