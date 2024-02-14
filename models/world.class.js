@@ -69,8 +69,7 @@ class World {
   resetEnergies() {
     this.level.enemies.forEach((enemy) => {
       if (enemy instanceof Endboss) {
-        enemy.reset();
-      }
+        enemy.reset(); }
     });
     this.character.resetCharacterEnergy();
   }
@@ -146,7 +145,6 @@ class World {
       this.checkThrowObjects();
       this.checkCollisionsWithThrowables();
     }, 50);
-
     this.checkDistanceToEndboss = setInterval(() => {
       this.updateBossBehavior();
     }, 100);
@@ -162,21 +160,17 @@ class World {
   }
 
 
-/**
- * Checks if the character can throw objects and handles the throwing action.
- */
-checkThrowObjects() {
-  if (this.keyboard.D && !this.prevDState && this.collectedBottles > 0) {
-    let bottle = new ThrowableObject(
-      this.character.x + 100,
-      this.character.y + 100,
-      this.statusBar_Bottles
-    );
-    this.throwableObjects.push(bottle);
-    this.collectedBottles--;
+  /**
+  * Checks if the character can throw objects and handles the throwing action.
+  */
+  checkThrowObjects() {
+    if (this.keyboard.D && !this.prevDState && this.collectedBottles > 0) {
+      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.statusBar_Bottles);
+      this.throwableObjects.push(bottle);
+      this.collectedBottles--;
+    }
+    this.prevDState = this.keyboard.D;
   }
-  this.prevDState = this.keyboard.D;
-}
 
 
   /**
@@ -195,7 +189,6 @@ checkThrowObjects() {
   * Checks if the character is colliding with a specific enemy.
   *
   * @param {Object} enemy - The enemy to check for collision.
-  * @returns {boolean} - True if there is a collision, false otherwise.
   */
   isCharacterCollidingWithEnemy(enemy) {
     return (
@@ -223,7 +216,7 @@ checkThrowObjects() {
     ) {
         enemy.die();
     }
-}
+  }
 
 
   /**
@@ -232,23 +225,21 @@ checkThrowObjects() {
   checkCollisionsWithBottles() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
-        this.removeBottle(bottle);
-      }
+        this.removeBottle(bottle);}
     });
   }
 
 
-/**
- * Checks collisions between throwable objects and enemies, and handles damage to both the end boss and other enemies.
- */
-checkCollisionsWithThrowables() {
-  this.throwableObjects.forEach((throwableObject) => {
-    if (!throwableObject.collidedWithEndBoss) {
-      this.checkCollisionWithEndboss(throwableObject);
-      this.checkCollisionWithOtherEnemies(throwableObject);
-    }
-  });
-}
+  /**
+  * Checks collisions between throwable objects and enemies, and handles damage to both the end boss and other enemies.
+  */
+  checkCollisionsWithThrowables() {
+    this.throwableObjects.forEach((throwableObject) => {
+      if (!throwableObject.collidedWithEndBoss) {
+        this.checkCollisionWithEndboss(throwableObject);
+        this.checkCollisionWithOtherEnemies(throwableObject);}
+    });
+  }
 
 
   /**
@@ -265,9 +256,8 @@ checkCollisionsWithThrowables() {
     endboss.endBossHurt();
     this.statusBar_EndBoss.setPercentage(endboss.endBossEnergy);
     if (endboss.endBossEnergy <= 0) {
-      this.gameWon();
+      this.gameWon(); }
     }
-  }
   }
 
 
@@ -275,17 +265,17 @@ checkCollisionsWithThrowables() {
   * Checks collision between a throwable object and other enemies, and handles the damage dealt to those enemies.
   */
   checkCollisionWithOtherEnemies(throwableObject) {
-  this.level.enemies.forEach((enemy) => {
-    if (!(enemy instanceof Endboss) && throwableObject.isColliding(enemy)) {
-      throwableObject.splashBottle();
-      setTimeout(() => {
-        this.removeThrowableObject(throwableObject);
-      }, 500);
-      if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-        enemy.die();
-      }
-     }
-    });
+    this.level.enemies.forEach((enemy) => {
+      if (!(enemy instanceof Endboss)) {
+        const collisionX = throwableObject.x < enemy.x + enemy.width && throwableObject.x + throwableObject.width > enemy.x;
+        const collisionY = throwableObject.y < enemy.y + enemy.height && throwableObject.y + throwableObject.height > enemy.y;
+        if (collisionX && collisionY) {
+          throwableObject.splashBottle();
+          setTimeout(() => {
+            this.removeThrowableObject(throwableObject);
+          }, 500);
+          if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
+            enemy.die();}}}});
   }
 
 
@@ -295,8 +285,7 @@ checkCollisionsWithThrowables() {
   checkCollisionsWithCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
-        this.removeCoin(coin);
-      }
+        this.removeCoin(coin); }
     });
   }
 
@@ -307,8 +296,7 @@ checkCollisionsWithThrowables() {
   removeThrowableObject(throwableObject) {
     const index = this.throwableObjects.indexOf(throwableObject);
     if (index !== -1) {
-      this.throwableObjects.splice(index, 1);
-    }
+      this.throwableObjects.splice(index, 1); }
   }
 
 
@@ -321,8 +309,7 @@ checkCollisionsWithThrowables() {
       this.statusBar_Bottles.collectBottle();
       this.level.bottles.splice(index, 1);
       this.collectedBottles++;
-      playBottleSound();
-    }
+      playBottleSound(); }
   }
 
 
@@ -384,12 +371,9 @@ checkCollisionsWithThrowables() {
     if (moveableObject.otherDirection) {
       this.flipImage(moveableObject);
     }
-
     moveableObject.draw(this.ctx);
-
     if (moveableObject.otherDirection) {
-      this.flipImageBack(moveableObject);
-    }
+      this.flipImageBack(moveableObject);}
   }
 
 
